@@ -1,4 +1,4 @@
-package com.example.foodieapp;
+package com.example.foodieapp.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
