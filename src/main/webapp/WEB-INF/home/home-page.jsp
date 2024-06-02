@@ -12,11 +12,9 @@
 </head>
 <body>
 Witaj w FoodieApp!
-
-
 tu bedzie ładny widok
 <p>
-    <a href="/home/login">Zaloguj się</a>
+    <a href="/login">Zaloguj się</a>
 </p>
 <p>
     <a href="/home/signup">Zarejestruj się</a>
