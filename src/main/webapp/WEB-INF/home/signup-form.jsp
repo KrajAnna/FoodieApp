@@ -13,7 +13,7 @@
     <title>Sign Up</title>
 </head>
 <body>
-<form:form method="post" modelAttribute="user" action="/signup">
+<form:form method="post" modelAttribute="user" action="/app/signup">
     <form:hidden path="id"/>
     <label>First name:
         <form:input path="firstName"/>
