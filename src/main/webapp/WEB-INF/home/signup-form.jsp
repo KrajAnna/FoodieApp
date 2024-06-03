@@ -13,13 +13,13 @@
     <title>Sign Up</title>
 </head>
 <body>
-<form:form method="post" modelAttribute="user" action="/app/signup">
+<form:form method="post" modelAttribute="user" action="/home/signup">
     <form:hidden path="id"/>
     <label>First name:
         <form:input path="firstName"/>
         <form:errors path="firstName"/>
     </label>
-    <hr/>
+
     <label>Last name:
         <form:input path="lastName"/>
         <form:errors path="lastName"/>
