@@ -19,7 +19,7 @@
         <form:input path="firstName"/>
         <form:errors path="firstName"/>
     </label>
-
+    <hr/>
     <label>Last name:
         <form:input path="lastName"/>
         <form:errors path="lastName"/>
@@ -31,7 +31,7 @@
     </label>
     <hr/>
     <label>Password:
-        <form:input path="password"/>
+        <form:password path="password"/>
         <form:errors path="password"/>
     </label>
     <hr/>

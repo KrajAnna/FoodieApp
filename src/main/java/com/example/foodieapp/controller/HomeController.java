@@ -32,7 +32,7 @@ public class HomeController {
         return "home/signup-form";
     }
     @PostMapping("/signup")
-    public String loginForm(@Valid User user, BindingResult bindingResult){
+    public String loginForm(@Valid User user, BindingResult bindingResult, Model model){
         if (bindingResult.hasErrors()) {
             return "home/signup-form";
         } else {
@@ -40,7 +40,8 @@ public class HomeController {
             String hashedPassword = passwordEncoder.encode(user.getPassword());
             user.setPassword(hashedPassword);
             userRepository.save(user); //w jakim miejscu sprawdzic, czy mail nie jest zajety?
-            return "redirect:/app"; // TBD - przekierowanie do głownego widoku apki po zalogowaniu
+            model.addAttribute("name", user.getFirstName());
+            return "home/welcome"; // TBD - przekierowanie do głownego widoku apki po zalogowaniu
         }
     }
 
