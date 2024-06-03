@@ -15,12 +15,13 @@ public class SecurityConfig {
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/home/**").permitAll()
-                .antMatchers("/app").authenticated()
-                .anyRequest().authenticated()
-                .and().formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/home");
+                .antMatchers("/").permitAll();
+//                .antMatchers("/home/**").permitAll()
+//                .antMatchers("/app").authenticated()
+//                .anyRequest().authenticated()
+//                .and().formLogin()
+//                .loginPage("/login")
+//                .defaultSuccessUrl("/home");
         return http.build();
     }
 
