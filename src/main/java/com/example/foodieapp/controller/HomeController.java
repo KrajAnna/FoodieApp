@@ -1,6 +1,7 @@
 package com.example.foodieapp.controller;
 
 import com.example.foodieapp.repository.UserRepository;
+import jakarta.validation.Valid;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import com.example.foodieapp.entity.*;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.validation.Valid;
+
 
 @Controller
 @RequestMapping("/home")

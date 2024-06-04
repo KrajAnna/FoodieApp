@@ -10,12 +10,11 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig {
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/").permitAll();
+                .anyRequest().permitAll();
 //                .antMatchers("/home/**").permitAll()
 //                .antMatchers("/app").authenticated()
 //                .anyRequest().authenticated()

@@ -1,14 +1,16 @@
 package com.example.foodieapp.entity;
 
+import jakarta.persistence.*;
 import lombok.Data;
 
-import javax.persistence.*;
 import java.time.LocalDate;
+
 
 @Entity
 @Table(name = "reviews")
 @Data
 public class Review {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
