@@ -12,4 +12,6 @@ public class DashboardController {
     public String welcomeApp() {
         return "dashboard/main-page";
     }
+
+
 }

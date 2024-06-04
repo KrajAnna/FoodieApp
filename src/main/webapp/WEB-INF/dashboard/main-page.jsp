@@ -11,12 +11,14 @@
     <title>Foodie App</title>
 </head>
 <body>
-<p>
+
 <p>
 Tu bedzie lista 5 ostatnich recenzji: </br>
 
-Dodaj recenzję </br>
-Dodaj restaurację </br>
+</br>
+    <a href="/places">Miejsca</a></br>
+    <a href="/reviews">Recenzje</a></br>
+ </br>
 </p>
 </body>
 </html>

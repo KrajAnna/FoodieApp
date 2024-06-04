@@ -7,6 +7,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 @Data
@@ -27,7 +29,8 @@ public class User {
     @Email
     @NotBlank
     private String email;
-//    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-//    private List<Review> reviews;
+
+    @ManyToMany
+    private List<Review> reviews;
 
 }

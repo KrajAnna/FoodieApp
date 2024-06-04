@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
-
 @Controller
 @RequestMapping("/home")
 public class HomeController {
@@ -23,30 +22,29 @@ public class HomeController {
     }
 
     @GetMapping("")
-    public String helloApp(){
+    public String helloApp() {
         return "home/home-page";
     }
 
     @GetMapping("/signup")
-    public String signup(Model model){
+    public String signup(Model model) {
         model.addAttribute("user", new User());
         return "home/signup-form";
     }
+
     @PostMapping("/signup")
-    public String loginForm(@Valid User user, BindingResult bindingResult, Model model){
+    public String loginForm(@Valid User user, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "home/signup-form";
-        } else {
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            String hashedPassword = passwordEncoder.encode(user.getPassword());
-            user.setPassword(hashedPassword);
-            userRepository.save(user); //w jakim miejscu sprawdzic, czy mail nie jest zajety?
-            model.addAttribute("name", user.getFirstName());
-            return "home/welcome"; // TBD - przekierowanie do głownego widoku apki po zalogowaniu
         }
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(hashedPassword);
+        userRepository.save(user); //w jakim miejscu sprawdzic, czy mail nie jest zajety?
+        model.addAttribute("name", user.getFirstName());
+        return "home/welcome"; //
+
     }
-
-
 
 
 }

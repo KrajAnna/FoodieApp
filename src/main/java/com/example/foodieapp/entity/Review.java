@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Entity
@@ -17,8 +18,8 @@ public class Review {
     private LocalDate date; //automatycznie dodana podczas zapisu
     private int rating; // miedzy 1-10
     private String description;
-//    @ManyToMany(mappedBy = "reviews", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-//    private List<User> users;
+    @ManyToMany(mappedBy = "reviews")
+    private List<User> users;
 
     @ManyToOne
     private Restaurant restaurant;
