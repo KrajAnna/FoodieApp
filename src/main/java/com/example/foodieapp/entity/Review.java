@@ -20,11 +20,18 @@ public class Review {
     private int ratingService; // miedzy 1-10
     private int ratingRestaurant; // miedzy 1-10
     private int ratingGenExperience; // miedzy 1-10
+    private double ratingAvg;
     private String description;
     @ManyToMany(mappedBy = "reviews")
     private List<User> users;
 
     @ManyToOne
     private Restaurant restaurant;
+    @PrePersist
+    @PreUpdate
+    public void calculateAvgRating() {
+        double sum = ratingFood + ratingService + ratingRestaurant + ratingGenExperience;
+        ratingAvg = sum / 4.0;
+    }
 
 }

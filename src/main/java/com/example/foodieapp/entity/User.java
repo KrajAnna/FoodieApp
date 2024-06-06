@@ -33,4 +33,7 @@ public class User {
     @ManyToMany
     private List<Review> reviews;
 
+    @OneToMany
+    private List<User> followingList;
+
 }

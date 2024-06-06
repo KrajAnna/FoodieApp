@@ -19,7 +19,7 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${places}" var="place">
+    <c:forEach items="${restaurants}" var="place">
         <tr>
             <td>${place.name}</td>
             <td>${place.address}</td>

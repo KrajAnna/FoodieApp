@@ -1,20 +1,29 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: anna
+  Date: 6/2/24
+  Time: 6:27 PM
+  To change this template use File | Settings | File Templates.
+--%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
-    <title>Restaurants</title>
+    <title>Review</title>
 </head>
 <body>
-You are adding review of ${restaurantName}
-<form:form method="post" modelAttribute="review" action="/places/review">
+<form:form method="post" modelAttribute="review" action="/reviews/add">
+<%--    <form:hidden path="users" value="${user}"/>--%>
     <form:hidden path="id"/>
-<%--    <form:hidden path="restaurants" value="${restaurantId}"/>--%>
     <label>Date:
         <form:input type="date" path="date"/>
     </label>
+    <label>Restaurant:
+        <form:select path="restaurant" itemLabel="name" itemValue="id" items="${restaurants}"/>
+    </label>
     <label>Description:
-        <form:input type="textarea" path="description"/>
+        <form:textarea path="description" rows="5" cols="20"/>
         <form:errors path="description"/>
     </label>
     <hr/>
@@ -30,11 +39,6 @@ You are adding review of ${restaurantName}
     </label>
     <hr/>
     <form:button>Save</form:button>
-
-
 </form:form>
-<p>
-    Tu bedzie dodaj zalacznik - zdjęcia
-</p>
 </body>
 </html>

@@ -7,13 +7,11 @@ import com.example.foodieapp.repository.RestaurantRepository;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @RequestMapping("/places")
 @Controller
@@ -23,10 +21,13 @@ public class RestaurantController {
     public RestaurantController(RestaurantRepository restaurantRepository) {
         this.restaurantRepository = restaurantRepository;
     }
+    @ModelAttribute("restaurants")
+    public List<Restaurant> restaurants() {
+        return restaurantRepository.findAll();
+    }
 
     @GetMapping("")
-    public String mainPlacesView(Model model) {
-        model.addAttribute("places", restaurantRepository.findAll());
+    public String mainPlacesView() {
         return "dashboard/place-main";
     }
 
