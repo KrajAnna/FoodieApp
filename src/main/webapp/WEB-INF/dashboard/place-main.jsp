@@ -15,6 +15,7 @@
         <th>Address</th>
         <th>Rating</th>
         <th>Details</th>
+
     </tr>
     </thead>
     <tbody>
@@ -24,6 +25,7 @@
             <td>${place.address}</td>
             <td>rating TBD</td>
             <td><a href="/places">View Details TBD</a></td>
+            <td><a href="places/review/${place.id}">Add a visit and review</a></td>
         </tr>
     </c:forEach>
     </tbody>
