@@ -4,36 +4,36 @@ import com.example.foodieapp.entity.Restaurant;
 import com.example.foodieapp.entity.Review;
 import com.example.foodieapp.repository.RestaurantRepository;
 import com.example.foodieapp.repository.ReviewRepository;
+import com.example.foodieapp.repository.UserRepository;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 //@Transactional
 public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final RestaurantRepository restaurantRepository;
+    private final UserService userService;
 
-    public ReviewService(ReviewRepository reviewRepository, RestaurantRepository restaurantRepository) {
-        this.reviewRepository = reviewRepository;
-        this.restaurantRepository = restaurantRepository;
-    }
-
-    public double ratingAvg( ){
+    public double ratingAvg() {
         return 0;
     }
 
-    public void addReview(Review review){
+    public void addReview(Review review) {
         reviewRepository.save(review);
     }
 
-    public List<Review> findAllReview(){
+    public List<Review> findAllReview() {
         return reviewRepository.findAll();
     }
 
-    public void addReviewToRestaurant(Review review, Long restaurantId){
+    public void addReviewToRestaurant(Review review, Long restaurantId) {
         review.setRestaurant(restaurantRepository.getById(restaurantId));
+        review.setUser(userService.loggedUser());
         reviewRepository.save(review);
     }
 }

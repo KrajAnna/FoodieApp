@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Getter
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-class UserForAccess implements UserDetails {
+public class UserForAccess implements UserDetails {
     private final String password;
     private final String username;
     private final Set<GrantedAuthority> authorities;

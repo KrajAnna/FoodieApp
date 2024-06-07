@@ -2,7 +2,7 @@ package com.example.foodieapp.controller;
 
 import com.example.foodieapp.entity.Restaurant;
 import com.example.foodieapp.entity.Review;
-import com.example.foodieapp.services.DummyUserService;
+import com.example.foodieapp.security.SpringUserDetailsService;
 import com.example.foodieapp.services.RestaurantService;
 import com.example.foodieapp.services.ReviewService;
 import jakarta.validation.Valid;
@@ -19,8 +19,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReviewController {
     private final RestaurantService restaurantService;
-    private final DummyUserService userService;
     private final ReviewService reviewService;
+    private final SpringUserDetailsService springUserDetailsService;
 
 
     @ModelAttribute("restaurants")
