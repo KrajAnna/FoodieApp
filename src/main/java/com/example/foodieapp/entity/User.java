@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -30,10 +31,18 @@ public class User {
     @NotBlank
     private String email;
 
-    @ManyToMany
+    @OneToMany (mappedBy = "user")
     private List<Review> reviews;
 
-    @OneToMany
-    private List<User> followingList;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "user_followers",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "follower_id")
+    )
+    private Set<User> followers;
+
+    @ManyToMany(mappedBy = "followers")
+    private Set<User> following;
 
 }

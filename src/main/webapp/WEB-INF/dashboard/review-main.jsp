@@ -22,7 +22,7 @@ Your reviews:
     <c:forEach items="${reviews}" var="review">
         <tr>
             <td>${review.date}</td>
-            <td>${review.ratingAvg}</td>
+<%--            <td>${review.ratingAvg}</td>--%>
             <td><a href="/reviews/${review.id}">View Details TBD</a></td>
         </tr>
     </c:forEach>

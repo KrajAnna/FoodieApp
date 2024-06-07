@@ -17,6 +17,6 @@ public class Restaurant {
     private String name;
     @NotBlank
     private String address;
-    @OneToMany
+    @OneToMany (mappedBy = "restaurant")
     private List<Review> reviews;
 }

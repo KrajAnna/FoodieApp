@@ -6,10 +6,11 @@
     <title>Restaurants</title>
 </head>
 <body>
-You are adding review of ${restaurantName}
-<form:form method="post" modelAttribute="review" action="/places/review">
+You are adding review of ${restaurant.name}
+
+<form:form method="post" modelAttribute="review" action="/places/review/${restaurant.id}">
     <form:hidden path="id"/>
-<%--    <form:hidden path="restaurants" value="${restaurantId}"/>--%>
+<%--    <input type = "hidden" value="${restaurant.id}" name="restaurantId">--%>
     <label>Date:
         <form:input type="date" path="date"/>
     </label>
@@ -19,11 +20,11 @@ You are adding review of ${restaurantName}
     </label>
     <hr/>
     <label>Rating:
-        Food: <form:input type="number" name="ratingFood" min="1" max="10" path="ratingFood"/>
+        Food: <form:input type="number" name="ratingFood" min="0" max="10" path="ratingFood"/>
         <form:errors path="ratingFood"/>
-        Service: <form:input type="number" name="ratingService" min="1" max="10" path="ratingService"/>
+        Service: <form:input type="number" name="ratingService" min="0" max="10" path="ratingService"/>
         <form:errors path="ratingService"/>
-        Ambiance <form:input type="number" name="ratingRestaurant" min="1" max="10" path="ratingRestaurant"/>
+        Vibe: <form:input type="number" name="ratingRestaurant" min="0" max="10" path="ratingRestaurant"/>
         <form:errors path="ratingRestaurant"/>
         General experience: <form:input type="number" name="ratingGenExperience" min="1" max="10" path="ratingGenExperience"/>
         <form:errors path="ratingGenExperience"/>
