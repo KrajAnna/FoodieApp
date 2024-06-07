@@ -5,6 +5,7 @@ import com.example.foodieapp.entity.Review;
 import com.example.foodieapp.repository.RestaurantRepository;
 import com.example.foodieapp.services.RestaurantService;
 import com.example.foodieapp.services.ReviewService;
+import com.example.foodieapp.services.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ import java.util.List;
 public class RestaurantController {
     private final RestaurantService restaurantService;
     private final ReviewService reviewService;
+    private final UserService userService;
 
     @ModelAttribute("restaurants")
     public List<Restaurant> restaurants() {

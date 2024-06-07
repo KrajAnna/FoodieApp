@@ -8,11 +8,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class LoginController {
-    @GetMapping(value = {"/login"})
-    public String displayLoginForm() {
+
+    @GetMapping("/login")
+    public String loginPage() {
         return "home/login-form";
     }
 
-//    @PostMapping("/login")
-//    public String
+    @GetMapping("/login/fail")
+    public String loginFailedPage() {
+        return "login-failed";
+    }
+
+    @GetMapping("/403")
+    public String unauthorized() {
+        return "403";
+    }
+
+
 }

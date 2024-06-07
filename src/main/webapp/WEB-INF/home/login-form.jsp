@@ -1,4 +1,4 @@
-<jsp:useBean id="_csrf" scope="request" type="org.springframework.boot.autoconfigure.web.servlet.WebMvcProperties.Contentnegotiation"/>
+
 <%--
   Created by IntelliJ IDEA.
   User: anna
@@ -14,9 +14,9 @@
 </head>
 <body>
 <form method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
+    <div><label> Email: <input type="text" name="username"/> </label></div>
     <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
+    <button type="submit" class="btn btn-primary mt-3">Login</button>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 </form>
 </body>

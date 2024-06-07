@@ -1,5 +1,6 @@
 package com.example.foodieapp.entity;
 
+import com.example.foodieapp.security.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -34,15 +35,11 @@ public class User {
     @OneToMany (mappedBy = "user")
     private List<Review> reviews;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "user_followers",
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "follower_id")
-    )
-    private Set<User> followers;
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<RoleEntity> roles;
 
-    @ManyToMany(mappedBy = "followers")
-    private Set<User> following;
 
 }

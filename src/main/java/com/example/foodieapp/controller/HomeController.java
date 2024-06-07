@@ -1,7 +1,9 @@
 package com.example.foodieapp.controller;
 
 import com.example.foodieapp.repository.UserRepository;
+import com.example.foodieapp.services.UserService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import com.example.foodieapp.entity.*;
@@ -14,12 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/home")
+@RequiredArgsConstructor
 public class HomeController {
-    private final UserRepository userRepository;
 
-    public HomeController(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private final UserService userService;
 
     @GetMapping("")
     public String helloApp() {
@@ -37,12 +37,9 @@ public class HomeController {
         if (bindingResult.hasErrors()) {
             return "home/signup-form";
         }
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String hashedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hashedPassword);
-        userRepository.save(user); //w jakim miejscu sprawdzic, czy mail nie jest zajety?
+        userService.saveUser(user); //w jakim miejscu sprawdzic, czy mail nie jest zajety?
         model.addAttribute("name", user.getFirstName());
-        return "home/welcome"; //
+        return "home/signup-welcome"; //
 
     }
 
