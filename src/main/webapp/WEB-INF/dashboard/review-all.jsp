@@ -3,28 +3,42 @@
 <html>
 <head>
     <title>Reviews</title>
+<%--    <style>--%>
+<%--        table {--%>
+<%--            width: 100%;--%>
+<%--            border-collapse: collapse;--%>
+<%--        }--%>
+<%--        th, td {--%>
+<%--            border: 1px solid black;--%>
+<%--            padding: 8px;--%>
+<%--            text-align: left;--%>
+<%--        }--%>
+<%--        th {--%>
+<%--            background-color: #f2f2f2;--%>
+<%--        }--%>
+<%--    </style>--%>
 </head>
 <body>
 <p>
-Your reviews:
+    All reviews:
 </p>
 <table>
     <thead>
     <tr>
         <th>Date</th>
         <th>Rating avg</th>
-        <th>Check details</th>
-        <th>Details</th>
         <th>Restaurant</th>
+        <th>Check details</th>
 
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${reviews}" var="review">
+    <c:forEach items="${reviews}" var="entry">
         <tr>
-            <td>${review.date}</td>
-<%--            <td>${review.ratingAvg}</td>--%>
-            <td><a href="/reviews/${review.id}">View Details TBD</a></td>
+            <td>${entry.key.date}</td>
+            <td>${entry.key.date}</td>
+            <td>${entry.value.name}</td>
+            <td><a href="/reviews/${entry.key.id}">View Details TBD</a></td>
         </tr>
     </c:forEach>
     </tbody>

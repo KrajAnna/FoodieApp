@@ -34,7 +34,7 @@ public class ReviewController {
     }
     @GetMapping("/all")
     public String allReviewView(Model model) {
-        model.addAttribute("reviews", reviewService.findAllReview());
+        model.addAttribute("reviews", reviewService.findAllReviewRestaurant());
         return "dashboard/review-all";
     }
 

@@ -13,18 +13,18 @@ Your reviews:
     <tr>
         <th>Date</th>
         <th>Rating avg</th>
-        <th>Check details</th>
-        <th>Details</th>
         <th>Restaurant</th>
+        <th>Check details</th>
 
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${userReviews}" var="review">
+    <c:forEach items="${reviews}" var="entry">
         <tr>
-            <td>${review.date}</td>
-<%--            <td>${review.ratingAvg}</td>--%>
-            <td><a href="/reviews/${review.id}">View Details TBD</a></td>
+            <td>${entry.key.date}</td>
+            <td>${entry.key.date}</td>
+            <td>${entry.value.name}</td>
+            <td><a href="/reviews/${entry.key.id}">View Details TBD</a></td>
         </tr>
     </c:forEach>
     </tbody>

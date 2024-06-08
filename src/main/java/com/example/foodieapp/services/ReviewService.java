@@ -9,7 +9,10 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -38,8 +41,15 @@ public class ReviewService {
         reviewRepository.save(review);
     }
 
-    public List<Review> findAllReviewUser(){
-        return reviewRepository.findAllByUser(userService.loggedUser());
+    public Map<Review,Restaurant> findAllReviewUser(){
+        List<Review> reviews = reviewRepository.findAllByUser(userService.loggedUser());
+        return reviews.stream().collect(Collectors.toMap(review -> review, Review::getRestaurant));
     }
+
+    public Map<Review,Restaurant> findAllReviewRestaurant(){
+        List<Review> reviews = reviewRepository.findAllByReview();
+        return reviews.stream().collect(Collectors.toMap(review -> review, Review::getRestaurant));
+    }
+
 
 }
