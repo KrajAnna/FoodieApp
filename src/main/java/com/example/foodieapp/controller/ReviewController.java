@@ -20,7 +20,6 @@ import java.util.List;
 public class ReviewController {
     private final RestaurantService restaurantService;
     private final ReviewService reviewService;
-    private final SpringUserDetailsService springUserDetailsService;
 
 
     @ModelAttribute("restaurants")
@@ -29,9 +28,14 @@ public class ReviewController {
     }
 
     @GetMapping("")
-    public String mainReviewView(Model model) {
+    public String yourReviewView(Model model) {
+        model.addAttribute("userReviews", reviewService.findAllReviewUser());
+        return "dashboard/review-user";
+    }
+    @GetMapping("/all")
+    public String allReviewView(Model model) {
         model.addAttribute("reviews", reviewService.findAllReview());
-        return "dashboard/review-main";
+        return "dashboard/review-all";
     }
 
     @GetMapping("/add")

@@ -24,6 +24,7 @@ public class ReviewService {
     }
 
     public void addReview(Review review) {
+        review.setUser(userService.loggedUser());
         reviewRepository.save(review);
     }
 
@@ -36,4 +37,9 @@ public class ReviewService {
         review.setUser(userService.loggedUser());
         reviewRepository.save(review);
     }
+
+    public List<Review> findAllReviewUser(){
+        return reviewRepository.findAllByUser(userService.loggedUser());
+    }
+
 }

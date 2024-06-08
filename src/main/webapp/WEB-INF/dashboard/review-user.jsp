@@ -15,11 +15,12 @@ Your reviews:
         <th>Rating avg</th>
         <th>Check details</th>
         <th>Details</th>
+        <th>Restaurant</th>
 
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${reviews}" var="review">
+    <c:forEach items="${userReviews}" var="review">
         <tr>
             <td>${review.date}</td>
 <%--            <td>${review.ratingAvg}</td>--%>
@@ -30,6 +31,7 @@ Your reviews:
 </table>
 
 <a href="/reviews/add">Add a new review!</a></br>
+<a href="/reviews/all">Check all review!</a></br>
 - sorted by rating - could be added</br>
 
 </body>
