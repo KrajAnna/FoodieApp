@@ -37,11 +37,12 @@ public class ReviewService {
         reviewRepository.save(review);
     }
 
-    public Map<Map<Review,Double>, Restaurant> findAllReviews() {
+    public Map<Map<Review, Double>, Restaurant> findAllReviews() {
         return reviewRepository.findAllByReview().stream()
                 .collect(Collectors.toMap(this::addRatingToReview, Review::getRestaurant));
     }
-    public Map<Map<Review,Double>, Restaurant> findAllReviewsOfUser() {
+
+    public Map<Map<Review, Double>, Restaurant> findAllReviewsOfUser() {
         List<Review> reviews = reviewRepository.findAllByReview().stream()
                 .filter(e -> e.getUser().equals(userService.loggedUser())).toList();
         return reviews.stream()
@@ -62,13 +63,24 @@ public class ReviewService {
         set.add(review.getRatingGenExperience());
         return set;
     }
-    public Map<Review, Double> addRatingToReview(Review review){
+
+    public Map<Review, Double> addRatingToReview(Review review) {
         return Map.of(review, ratingAvg(review));
     }
 
-    public Map<Review, Double> findReview(Long id){
-        return Map.of(reviewRepository.getById(id), ratingAvg(reviewRepository.getById(id)));
+    public Map<Map<Review, Double>, Restaurant> findReviewCombo(Long id) {
+        Map<Map<Review, Double>, Restaurant> map = findAllReviews();
+        return map.entrySet().stream().filter(reviewRating -> reviewRating.getKey().keySet().stream()
+                        .anyMatch(review -> review.getId().equals(reviewRepository.getById(id))))
+                .collect(Collectors.toMap(entry -> entry.getKey(), entry -> entry.getValue()));
     }
+
+    public Map<Review,Double> findReview(Long id){
+        Review review = reviewRepository.getById(id);;
+        return Map.of(review, ratingAvg(review));
+    }
+
+
 
 
 }

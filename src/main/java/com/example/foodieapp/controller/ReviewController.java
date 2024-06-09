@@ -31,6 +31,7 @@ public class ReviewController {
         model.addAttribute("userReviews", reviewService.findAllReviewsOfUser());
         return "dashboard/review-user";
     }
+
     @GetMapping("/all")
     public String allReviewView(Model model) {
         model.addAttribute("reviewsRat", reviewService.findAllReviews());
@@ -53,10 +54,10 @@ public class ReviewController {
     }
 
     @GetMapping("/{reviewId}")
-    @ResponseBody
     public String checkReview(@PathVariable Long reviewId, Model model) {
         model.addAttribute("review", reviewService.findReview(reviewId));
-        return "passed";
+        return "dashboard/review-details";
+
     }
 
 

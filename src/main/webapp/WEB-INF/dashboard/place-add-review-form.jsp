@@ -24,7 +24,7 @@ You are adding review of ${restaurant.name}
         <form:errors path="ratingFood"/>
         Service: <form:input type="number" name="ratingService" min="0" max="10" path="ratingService"/>
         <form:errors path="ratingService"/>
-        Vibe: <form:input type="number" name="ratingRestaurant" min="0" max="10" path="ratingRestaurant"/>
+        Vibe: <form:input type="number" name="ratingVibe" min="0" max="10" path="ratingVibe"/>
         <form:errors path="ratingRestaurant"/>
         General experience: <form:input type="number" name="ratingGenExperience" min="1" max="10" path="ratingGenExperience"/>
         <form:errors path="ratingGenExperience"/>
