@@ -2,7 +2,6 @@ package com.example.foodieapp.controller;
 
 import com.example.foodieapp.entity.Restaurant;
 import com.example.foodieapp.entity.Review;
-import com.example.foodieapp.security.SpringUserDetailsService;
 import com.example.foodieapp.services.RestaurantService;
 import com.example.foodieapp.services.ReviewService;
 import jakarta.validation.Valid;
@@ -29,12 +28,12 @@ public class ReviewController {
 
     @GetMapping("")
     public String yourReviewView(Model model) {
-        model.addAttribute("userReviews", reviewService.findAllReviewUser());
+        model.addAttribute("userReviews", reviewService.findAllReviewsUser());
         return "dashboard/review-user";
     }
     @GetMapping("/all")
     public String allReviewView(Model model) {
-        model.addAttribute("reviews", reviewService.findAllReviewRestaurant());
+        model.addAttribute("reviews", reviewService.findAllReviewsRestaurant());
         return "dashboard/review-all";
     }
 

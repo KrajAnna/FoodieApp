@@ -19,7 +19,7 @@ Your reviews:
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${reviews}" var="entry">
+    <c:forEach items="${userReviews}" var="entry">
         <tr>
             <td>${entry.key.date}</td>
             <td>${entry.key.date}</td>

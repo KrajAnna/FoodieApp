@@ -4,12 +4,9 @@ import com.example.foodieapp.entity.Restaurant;
 import com.example.foodieapp.entity.Review;
 import com.example.foodieapp.repository.RestaurantRepository;
 import com.example.foodieapp.repository.ReviewRepository;
-import com.example.foodieapp.repository.UserRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -41,13 +38,21 @@ public class ReviewService {
         reviewRepository.save(review);
     }
 
-    public Map<Review,Restaurant> findAllReviewUser(){
-        List<Review> reviews = reviewRepository.findAllByUser(userService.loggedUser());
+
+
+    public Map<Review,Restaurant> findAllReviewsRestaurant(){
+        List<Review> reviews = reviewRepository.findAllByReview();
         return reviews.stream().collect(Collectors.toMap(review -> review, Review::getRestaurant));
     }
 
-    public Map<Review,Restaurant> findAllReviewRestaurant(){
-        List<Review> reviews = reviewRepository.findAllByReview();
+
+    public Map<Review,Restaurant> findAllReviewsOfUser(){
+        List<Review> reviews = reviewRepository.findAllByReview().stream()
+                .filter(e-> e.getUser().equals(userService.loggedUser())).toList();
+        return reviews.stream().collect(Collectors.toMap(review -> review, Review::getRestaurant));
+    }
+    public Map<Review,Restaurant> findAllReviewsUser(){
+        List<Review> reviews = reviewRepository.findAllByUser(userService.loggedUser());
         return reviews.stream().collect(Collectors.toMap(review -> review, Review::getRestaurant));
     }
 
