@@ -28,12 +28,12 @@ public class ReviewController {
 
     @GetMapping("")
     public String yourReviewView(Model model) {
-        model.addAttribute("userReviews", reviewService.findAllReviewsUser());
+        model.addAttribute("userReviews", reviewService.findAllReviewsOfUser());
         return "dashboard/review-user";
     }
     @GetMapping("/all")
     public String allReviewView(Model model) {
-        model.addAttribute("reviews", reviewService.findAllReviewsRestaurant());
+        model.addAttribute("reviewsRat", reviewService.findAllReviews());
         return "dashboard/review-all";
     }
 
@@ -50,6 +50,13 @@ public class ReviewController {
         }
         reviewService.addReview(review);
         return "dashboard/review-welcome";
+    }
+
+    @GetMapping("/{reviewId}")
+    @ResponseBody
+    public String checkReview(@PathVariable Long reviewId, Model model) {
+        model.addAttribute("review", reviewService.findReview(reviewId));
+        return "passed";
     }
 
 

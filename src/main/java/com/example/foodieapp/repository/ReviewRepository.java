@@ -15,8 +15,6 @@ import java.util.Optional;
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 
-    @Query("SELECT r FROM Review r JOIN FETCH r.restaurant WHERE r.user = :user")
-    List <Review> findAllByUser(@Param("user") User user);
     @Query("SELECT r FROM Review r JOIN FETCH r.restaurant")
     List<Review> findAllByReview();
 

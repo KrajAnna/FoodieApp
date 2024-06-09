@@ -25,28 +25,25 @@
 <table>
     <thead>
     <tr>
-        <th>Date</th>
-        <th>Rating avg</th>
         <th>Restaurant</th>
+        <th>Date</th>
+        <th>Rating Total</th>
         <th>Check details</th>
 
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${reviews}" var="entry">
+    <c:forEach items="${reviewsRat}" var="entryOuter">
         <tr>
-            <td>${entry.key.date}</td>
-            <td>${entry.key.date}</td>
-            <td>${entry.value.name}</td>
-            <td><a href="/reviews/${entry.key.id}">View Details TBD</a></td>
+            <td>${entryOuter.value.name}</td>
+            <c:forEach items="${entryOuter.key}" var = "entryInner">
+            <td>${entryInner.key.date}</td>
+            <td>${entryInner.value}</td>
+            <td><a href="/reviews/${entryInner.key.id}">Check Details</a></td>
+            </c:forEach>
         </tr>
     </c:forEach>
     </tbody>
 </table>
-
-<a href="/reviews/add">Add a new review!</a></br>
-<a href="/reviews/all">Check all review!</a></br>
-- sorted by rating - could be added</br>
-
 </body>
 </html>

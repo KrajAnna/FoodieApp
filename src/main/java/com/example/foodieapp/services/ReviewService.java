@@ -7,8 +7,7 @@ import com.example.foodieapp.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,22 +37,37 @@ public class ReviewService {
         reviewRepository.save(review);
     }
 
-
-
-    public Map<Review,Restaurant> findAllReviewsRestaurant(){
-        List<Review> reviews = reviewRepository.findAllByReview();
-        return reviews.stream().collect(Collectors.toMap(review -> review, Review::getRestaurant));
+    public Map<Map<Review,Double>, Restaurant> findAllReviews() {
+        return reviewRepository.findAllByReview().stream()
+                .collect(Collectors.toMap(this::addRatingToReview, Review::getRestaurant));
     }
-
-
-    public Map<Review,Restaurant> findAllReviewsOfUser(){
+    public Map<Map<Review,Double>, Restaurant> findAllReviewsOfUser() {
         List<Review> reviews = reviewRepository.findAllByReview().stream()
-                .filter(e-> e.getUser().equals(userService.loggedUser())).toList();
-        return reviews.stream().collect(Collectors.toMap(review -> review, Review::getRestaurant));
+                .filter(e -> e.getUser().equals(userService.loggedUser())).toList();
+        return reviews.stream()
+                .collect(Collectors.toMap(this::addRatingToReview, Review::getRestaurant));
     }
-    public Map<Review,Restaurant> findAllReviewsUser(){
-        List<Review> reviews = reviewRepository.findAllByUser(userService.loggedUser());
-        return reviews.stream().collect(Collectors.toMap(review -> review, Review::getRestaurant));
+
+
+    public double ratingAvg(Review review) {
+        double sum = getAllRatings(review).stream().mapToInt(Integer::intValue).sum();
+        return sum / getAllRatings(review).size();
+    }
+
+    public Set<Integer> getAllRatings(Review review) {
+        Set<Integer> set = new HashSet<>();
+        set.add(review.getRatingService());
+        set.add(review.getRatingVibe());
+        set.add(review.getRatingFood());
+        set.add(review.getRatingGenExperience());
+        return set;
+    }
+    public Map<Review, Double> addRatingToReview(Review review){
+        return Map.of(review, ratingAvg(review));
+    }
+
+    public Map<Review, Double> findReview(Long id){
+        return Map.of(reviewRepository.getById(id), ratingAvg(reviewRepository.getById(id)));
     }
 
 

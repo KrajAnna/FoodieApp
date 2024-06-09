@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
-import java.util.List;
 
 
 @Entity
@@ -18,7 +17,7 @@ public class Review {
     private LocalDate date; //automatycznie dodana podczas zapisu
     private int ratingFood; // miedzy 1-10
     private int ratingService; // miedzy 1-10
-    private int ratingRestaurant; // miedzy 1-10
+    private int ratingVibe; // miedzy 1-10
     private int ratingGenExperience; // miedzy 1-10
     private String description;
 
