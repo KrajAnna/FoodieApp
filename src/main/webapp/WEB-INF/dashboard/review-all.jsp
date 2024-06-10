@@ -3,20 +3,20 @@
 <html>
 <head>
     <title>Reviews</title>
-<%--    <style>--%>
-<%--        table {--%>
-<%--            width: 100%;--%>
-<%--            border-collapse: collapse;--%>
-<%--        }--%>
-<%--        th, td {--%>
-<%--            border: 1px solid black;--%>
-<%--            padding: 8px;--%>
-<%--            text-align: left;--%>
-<%--        }--%>
-<%--        th {--%>
-<%--            background-color: #f2f2f2;--%>
-<%--        }--%>
-<%--    </style>--%>
+    <%--    <style>--%>
+    <%--        table {--%>
+    <%--            width: 100%;--%>
+    <%--            border-collapse: collapse;--%>
+    <%--        }--%>
+    <%--        th, td {--%>
+    <%--            border: 1px solid black;--%>
+    <%--            padding: 8px;--%>
+    <%--            text-align: left;--%>
+    <%--        }--%>
+    <%--        th {--%>
+    <%--            background-color: #f2f2f2;--%>
+    <%--        }--%>
+    <%--    </style>--%>
 </head>
 <body>
 <p>
@@ -33,16 +33,17 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${reviewsRat}" var="entryOuter">
+    <c:forEach items="${reviewRates}" var="reviewRate">
         <tr>
-            <td>${entryOuter.value.name}</td>
-            <c:forEach items="${entryOuter.key}" var = "entryInner">
-            <td>${entryInner.key.date}</td>
-            <td>${entryInner.value}</td>
-            <td><a href="/reviews/${entryInner.key.id}">Check Details</a></td>
-            </c:forEach>
+
+            <td>${reviewRate.review.restaurant.name}</td>
+            <td>${reviewRate.review.date}</td>
+            <td>${reviewRate.rating}</td>
+            <td><a href="/reviews/${reviewRate.review.id}">View Details</a></td>
+
         </tr>
     </c:forEach>
+    </tbody>
     </tbody>
 </table>
 </body>

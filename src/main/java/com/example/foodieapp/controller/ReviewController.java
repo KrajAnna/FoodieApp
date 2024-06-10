@@ -28,13 +28,13 @@ public class ReviewController {
 
     @GetMapping("")
     public String yourReviewView(Model model) {
-        model.addAttribute("userReviews", reviewService.findAllReviewsOfUser());
+        model.addAttribute("reviewRates", reviewService.findAllReviewsOfUser());
         return "dashboard/review-user";
     }
 
     @GetMapping("/all")
     public String allReviewView(Model model) {
-        model.addAttribute("reviewsRat", reviewService.findAllReviews());
+        model.addAttribute("reviewRates", reviewService.findAllReviews());
         return "dashboard/review-all";
     }
 

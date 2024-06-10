@@ -5,6 +5,7 @@ import com.example.foodieapp.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,6 +26,8 @@ public class RestaurantService {
     public Restaurant findRestaurantById(Long id){
         return restaurantRepository.getById(id);
     }
+
+
 
 
 

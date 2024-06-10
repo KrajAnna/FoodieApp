@@ -1,5 +1,6 @@
 package com.example.foodieapp.services;
 
+import com.example.foodieapp.entity.Restaurant;
 import com.example.foodieapp.entity.User;
 import com.example.foodieapp.repository.UserRepository;
 import com.example.foodieapp.security.Role;
@@ -14,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Set;
 
 @Service
@@ -44,6 +46,8 @@ public class UserService {
     public User loggedUser(){
         return userRepository.getByEmail(getCurrentUserEmail());
     }
+
+
 
 
 

@@ -40,25 +40,24 @@ public class ReviewService {
         reviewRepository.save(review);
     }
 
-    public Map<Map<Review, BigDecimal>, Restaurant> findAllReviews() {
+    public List<ReviewRate> findAllReviews() {
         return reviewRepository.findAllByReview().stream()
-                .collect(Collectors.toMap(this::addRatingToReview, Review::getRestaurant));
+                .map(this::addRatingToReview)
+                .toList();
     }
 
-    public Map<Map<Review, BigDecimal>, Restaurant> findAllReviewsOfUser() {
-        List<Review> reviews = reviewRepository.findAllByReview().stream()
-                .filter(e -> e.getUser().equals(userService.loggedUser())).toList();
-        return reviews.stream()
-                .collect(Collectors.toMap(this::addRatingToReview, Review::getRestaurant));
+    public List<ReviewRate> findAllReviewsOfUser(){
+        return reviewRepository.findAllByReview().stream()
+                .filter(review -> review.getUser().equals(userService.loggedUser()))
+                .map(this::addRatingToReview)
+                .toList();
     }
-
 
     public BigDecimal ratingAvg(Review review) {
         int sum = getAllRatings(review).stream().mapToInt(Integer::intValue).sum();
         double avg = (double) sum / getAllRatings(review).size();
         BigDecimal bd = BigDecimal.valueOf(avg);
-        bd = bd.setScale(2, RoundingMode.HALF_UP);
-        return bd;
+        return bd.setScale(2, RoundingMode.HALF_UP);
     }
 
     public List<Integer> getAllRatings(Review review) {
@@ -68,20 +67,8 @@ public class ReviewService {
                 review.getRatingGenExperience());
     }
 
-    public Map<Review, BigDecimal> addRatingToReview(Review review) {
-        return Map.of(review, ratingAvg(review));
-    }
-
-//    public Map<Map<Review, Double>, Restaurant> findReviewCombo(Long id) {
-//        Map<Map<Review, BigDecimal>, Restaurant> map = findAllReviews();
-//        return map.entrySet().stream().filter(reviewRating -> reviewRating.getKey().keySet().stream()
-//                        .anyMatch(review -> review.getId().equals(reviewRepository.getById(id))))
-//                .collect(Collectors.toMap(entry -> entry.getKey(), entry -> entry.getValue()));
-//    }
-
-    public Map<Review,BigDecimal> findReviewMap(Long id){
-        Review review = reviewRepository.getById(id);;
-        return Map.of(review, ratingAvg(review));
+    public ReviewRate addRatingToReview(Review review) {
+        return new ReviewRate(review, ratingAvg(review));
     }
 
 

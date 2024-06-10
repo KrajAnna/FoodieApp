@@ -31,7 +31,7 @@
 <%--</c:forEach>--%>
 
 
-Restaurant: TBD
+
 <hr/>
 Data: ${reviewRate.review.date}
 <hr/>
@@ -47,7 +47,8 @@ Total rating: ${reviewRate.rating}
 <hr/>
 Description: ${reviewRate.review.description}
 <hr/>
-
+Restaurant: ${reviewRate.review.restaurant.name}
+<hr/>
 <p>
     <a href="/reviews">Go back to the reviews list</a>
 </p>

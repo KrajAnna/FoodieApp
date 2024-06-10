@@ -6,7 +6,7 @@
 </head>
 <body>
 <p>
-Your reviews:
+    Your reviews:
 </p>
 <table>
     <thead>
@@ -19,21 +19,21 @@ Your reviews:
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${userReviews}" var="entryOuter">
+    <c:forEach items="${reviewRates}" var="reviewRate">
         <tr>
-            <td>${entryOuter.value.name}</td>
-            <c:forEach items="${entryOuter.key}" var = "entryInner">
-                <td>${entryInner.key.date}</td>
-                <td>${entryInner.value}</td>
-                <td><a href="/reviews/${entryInner.key.id}">View Details TBD</a></td>
-            </c:forEach>
+
+            <td>${reviewRate.review.restaurant.name}</td>
+            <td>${reviewRate.review.date}</td>
+            <td>${reviewRate.rating}</td>
+            <td><a href="/reviews/${reviewRate.review.id}">View Details</a></td>
+
         </tr>
     </c:forEach>
     </tbody>
 </table>
 
 <a href="/reviews/add">Add a new review!</a></br>
-<a href="/reviews/all">Check all review!</a></br>
+<a href="/reviews/all">Check all reviews!</a></br>
 - sorted by rating - could be added</br>
 
 </body>
