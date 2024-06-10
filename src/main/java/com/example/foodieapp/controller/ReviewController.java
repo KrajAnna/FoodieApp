@@ -55,7 +55,7 @@ public class ReviewController {
 
     @GetMapping("/{reviewId}")
     public String checkReview(@PathVariable Long reviewId, Model model) {
-        model.addAttribute("review", reviewService.findReview(reviewId));
+        model.addAttribute("reviewRate", reviewService.findReview(reviewId));
         return "dashboard/review-details";
 
     }

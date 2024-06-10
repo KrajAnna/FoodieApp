@@ -30,22 +30,24 @@
 
 <%--</c:forEach>--%>
 
-<c:forEach items="${review}" var="entry">
-    Restaurant: TBD
-    <hr/>
-    Data: ${entry.key.date}
-    <hr/>
-    Food: ${entry.key.ratingFood}
-    <hr/>
-    Service: ${entry.key.ratingService}
-    <hr/>
-    Vibe: ${entry.key.ratingVibe}
-    <hr/>
-    General experience: ${entry.key.ratingGenExperience}
-    <hr/>
-    Total rating: ${entry.value}
-    <hr/>
-</c:forEach>
+
+Restaurant: TBD
+<hr/>
+Data: ${reviewRate.review.date}
+<hr/>
+Food: ${reviewRate.review.ratingFood}
+<hr/>
+Service: ${reviewRate.review.ratingService}
+<hr/>
+Vibe: ${reviewRate.review.ratingVibe}
+<hr/>
+General experience: ${reviewRate.review.ratingGenExperience}
+<hr/>
+Total rating: ${reviewRate.rating}
+<hr/>
+Description: ${reviewRate.review.description}
+<hr/>
+
 <p>
     <a href="/reviews">Go back to the reviews list</a>
 </p>
