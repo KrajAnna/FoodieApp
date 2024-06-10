@@ -1,8 +1,6 @@
 package com.example.foodieapp.services;
 
-import com.example.foodieapp.entity.Restaurant;
 import com.example.foodieapp.entity.Review;
-import com.example.foodieapp.entity.ReviewRate;
 import com.example.foodieapp.repository.RestaurantRepository;
 import com.example.foodieapp.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +9,6 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -28,10 +25,6 @@ public class ReviewService {
     public void addReview(Review review) {
         review.setUser(userService.loggedUser());
         reviewRepository.save(review);
-    }
-
-    public List<Review> findAllReview() {
-        return reviewRepository.findAll();
     }
 
     public void addReviewToRestaurant(Review review, Long restaurantId) {

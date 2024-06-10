@@ -2,32 +2,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Reviews</title>
-    <%--    <style>--%>
-    <%--        table {--%>
-    <%--            width: 100%;--%>
-    <%--            border-collapse: collapse;--%>
-    <%--        }--%>
-    <%--        th, td {--%>
-    <%--            border: 1px solid black;--%>
-    <%--            padding: 8px;--%>
-    <%--            text-align: left;--%>
-    <%--        }--%>
-    <%--        th {--%>
-    <%--            background-color: #f2f2f2;--%>
-    <%--        }--%>
-    <%--    </style>--%>
+    <title>Restaurant Details</title>
 </head>
 <body>
 <p>
-    All reviews:
+    Here you can check restaurant ${restaurant.name} details:
 </p>
+Address: ${restaurant.address}</br>
+TU MUSI BYC TOTAL RATING RESTAURACJI</br>
+
+Reviews list:
 <table>
     <thead>
     <tr>
-        <th>Restaurant</th>
         <th>Date</th>
         <th>Rating Total</th>
+        <th>Food</th>
+        <th>Service</th>
+        <th>Vibe</th>
+        <th>Experience</th>
         <th>Check details</th>
 
     </tr>
@@ -35,10 +28,12 @@
     <tbody>
     <c:forEach items="${reviewRates}" var="reviewRate">
         <tr>
-
-            <td>${reviewRate.review.restaurant.name}</td>
             <td>${reviewRate.review.date}</td>
             <td>${reviewRate.rating}</td>
+            <td>${reviewRate.review.ratingFood}</td>
+            <td>${reviewRate.review.ratingService}</td>
+            <td>${reviewRate.review.ratingVibe}</td>
+            <td>${reviewRate.review.ratingGenExperience}</td>
             <td><a href="/reviews/${reviewRate.review.id}">View Details</a></td>
 
         </tr>
@@ -46,5 +41,8 @@
     </tbody>
 
 </table>
+<p>
+    <a href="/places">Go back to the restaurants list</a>
+</p>
 </body>
 </html>

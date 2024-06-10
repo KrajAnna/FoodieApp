@@ -3,9 +3,7 @@ package com.example.foodieapp.controller;
 import com.example.foodieapp.entity.Restaurant;
 import com.example.foodieapp.entity.Review;
 import com.example.foodieapp.repository.RestaurantRepository;
-import com.example.foodieapp.services.RestaurantService;
-import com.example.foodieapp.services.ReviewService;
-import com.example.foodieapp.services.UserService;
+import com.example.foodieapp.services.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -13,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -47,6 +46,12 @@ public class RestaurantController {
         }
         restaurantService.addRestaurant(restaurant);
         return "dashboard/place-welcome";
+    }
+
+    @GetMapping("/{restaurantId}")
+    public String displayRestaurantDetails(@PathVariable Long restaurantId, Model model) {
+        model.addAttribute("reviewRates", restaurantService.findAllReviewsOfRestaurant(restaurantService.findRestaurantById(restaurantId)));
+        return "dashboard/place-details";
     }
 
     @GetMapping("/review/{restaurantId}")

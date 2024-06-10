@@ -38,9 +38,9 @@ public class UserService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-            return userDetails.getUsername(); // Assuming that username is the email
+            return userDetails.getUsername();
         }
-        return null; // Or throw an exception if preferred
+        return null;
     }
 
     public User loggedUser(){

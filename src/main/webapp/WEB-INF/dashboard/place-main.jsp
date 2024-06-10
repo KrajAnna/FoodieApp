@@ -13,7 +13,6 @@
     <tr>
         <th>Name</th>
         <th>Address</th>
-        <th>Rating</th>
         <th>Details</th>
 
     </tr>
@@ -23,8 +22,7 @@
         <tr>
             <td>${place.name}</td>
             <td>${place.address}</td>
-            <td>rating TBD</td>
-            <td><a href="/places">View Details TBD</a></td>
+            <td><a href="/places/${place.id}">View Details</a></td>
             <td><a href="places/review/${place.id}">Add a visit and review</a></td>
         </tr>
     </c:forEach>
