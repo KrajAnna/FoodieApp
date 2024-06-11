@@ -47,7 +47,7 @@ Total rating: ${reviewRate.rating}
 <hr/>
 Description: ${reviewRate.review.description}
 <hr/>
-Restaurant: ${reviewRate.review.restaurant.name}
+Restaurant: ${reviewRate.review.restaurant.name} -> <a href="/places/${reviewRate.review.restaurant.id}">See more reviews</a>
 <hr/>
 <p>
     <a href="/reviews">Go back to the reviews list</a>
