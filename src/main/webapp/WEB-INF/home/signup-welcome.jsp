@@ -17,7 +17,7 @@
 </c:out>
 </p>
 <p>
-  <a href="/app">Let's get started</a>
+  <a href="/review">Let's get started</a>
 </p>
 </body>
 </html>

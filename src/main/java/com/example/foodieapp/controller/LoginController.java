@@ -16,13 +16,9 @@ public class LoginController {
 
     @GetMapping("/login/fail")
     public String loginFailedPage() {
-        return "login-failed";
+        return "home/login-failed";
     }
 
-    @GetMapping("/403")
-    public String unauthorized() {
-        return "403";
-    }
 
 
 }

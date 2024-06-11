@@ -37,7 +37,7 @@ public class HomeController {
         if (bindingResult.hasErrors()) {
             return "home/signup-form";
         }
-        userService.saveUser(user); //w jakim miejscu sprawdzic, czy mail nie jest zajety?
+        userService.saveUser(user);
         model.addAttribute("name", user.getFirstName());
         return "home/signup-welcome"; //
 
