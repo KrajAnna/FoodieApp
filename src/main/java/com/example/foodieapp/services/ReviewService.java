@@ -18,9 +18,6 @@ public class ReviewService {
     private final RestaurantRepository restaurantRepository;
     private final UserService userService;
 
-    public double ratingAvg() {
-        return 0;
-    }
 
     public void addReview(Review review) {
         review.setUser(userService.loggedUser());
@@ -45,6 +42,8 @@ public class ReviewService {
                 .map(this::addRatingToReview)
                 .toList();
     }
+
+
 
     public BigDecimal ratingAvg(Review review) {
         int sum = getAllRatings(review).stream().mapToInt(Integer::intValue).sum();
