@@ -6,6 +6,8 @@ import com.example.foodieapp.repository.RestaurantRepository;
 import com.example.foodieapp.services.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +30,9 @@ public class RestaurantController {
         return restaurantService.findAllRestaurants();
     }
 
-    @GetMapping("")
-    public String mainPlacesView() {
+    @GetMapping
+    public String mainPlacesView(Model model) {
+
         return "dashboard/place-main";
     }
 
@@ -62,11 +65,11 @@ public class RestaurantController {
     }
 
     @PostMapping("/review/{restaurantId}")
-    public String addReviewToRestaurant(@PathVariable Long restaurantId, @Valid Review review, BindingResult bindingResult){
+    public String addReviewToRestaurant(@PathVariable Long restaurantId, @Valid Review review, BindingResult bindingResult, @AuthenticationPrincipal UserDetails userDetails){
         if (bindingResult.hasErrors()) {
             return "dashboard/place-add-review-form";
         }
-        reviewService.addReviewToRestaurant(review, restaurantId);//
+        reviewService.addReviewToRestaurant(review, restaurantId, userDetails);//
         return "dashboard/review-welcome";
     }
 

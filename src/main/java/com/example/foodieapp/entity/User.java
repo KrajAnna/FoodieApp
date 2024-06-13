@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import java.util.List;
 import java.util.Set;
@@ -30,6 +31,7 @@ public class User {
     private String password;
     @Email
     @NotBlank
+    @Column(unique = true)
     private String email;
 
     @OneToMany (mappedBy = "user")

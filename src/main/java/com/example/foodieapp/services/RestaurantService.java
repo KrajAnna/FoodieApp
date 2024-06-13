@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -31,20 +33,18 @@ public class RestaurantService {
                 .map(ReviewRate::getRating)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
-    public Pair<Restaurant,BigDecimal> pairRestaurantRate(Restaurant restaurant){
-        return Pair.of(restaurant, calculateRestaurantRate(restaurant));
-    }
-    public List<Pair<Restaurant,BigDecimal>> findAllRestaurantWithRating(){
-        return findAllRestaurants().stream()
-                .map(this::pairRestaurantRate)
-                .toList();
-    }
 
     public List<ReviewRate> findAllReviewsOfRestaurant(Restaurant restaurant){
         return reviewService.findAllReviews().stream()
                 .filter(review -> review.getReview().getRestaurant().equals(restaurant))
                 .toList();
     }
+
+    public Map<Restaurant,BigDecimal> restaurantRateMap(){
+        return findAllRestaurants().stream()
+                .collect(Collectors.toMap(r->r, this::calculateRestaurantRate));
+    }
+
 
 
 }

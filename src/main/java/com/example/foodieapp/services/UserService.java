@@ -9,13 +9,17 @@ import com.example.foodieapp.security.RoleRepository;
 
 import com.example.foodieapp.security.UserForAccess;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -27,32 +31,33 @@ public class UserService {
 
 
 
+
     public void saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         RoleEntity userRole = roleRepository.findByName(Role.USER);
         user.setRoles(Set.of(userRole));
+
         userRepository.save(user);
+
     }
 
-    public String getCurrentUserEmail() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
-            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+    public String getCurrentUserEmail(UserDetails userDetails) {
+        if (userDetails != null) {
             return userDetails.getUsername();
         }
         return null;
     }
 
-    public User loggedUser(){
-        return userRepository.getByEmail(getCurrentUserEmail());
+    public Long getCurrentUserId(UserDetails userDetails) {
+        String email = Optional.ofNullable(userDetails)
+                .map(UserDetails::getUsername)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return userRepository.findByEmail(email).get().getId();
     }
 
-
-
-
-
-
-
+    public User loggedUser(UserDetails userDetails) {
+        return userRepository.getByEmail(userDetails.getUsername());
+    }
 
 
 }

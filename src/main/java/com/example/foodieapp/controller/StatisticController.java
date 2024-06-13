@@ -21,24 +21,24 @@ import java.util.Map;
 public class StatisticController {
     private final StatisticService statisticService;
 
-    @ModelAttribute("reviewsTotal")
-    public int reviewsTotal() {
-        return statisticService.sumAllReviewsOfUser();
-    }
+//    @ModelAttribute("reviewsTotal")
+//    public int reviewsTotal() {
+//        return statisticService.sumAllReviewsOfUser();
+//    }
 
-    @ModelAttribute("reviewsMonths")
-    public Map<YearMonth, Long> reviewsMonths() {
-        return statisticService.sumAllReviewsOfUserLastMonth();
-    }
-
-    @ModelAttribute("reviewsYears")
-    public Map<Year, Long> reviewsYear() {
-        return statisticService.sumAllReviewsOfUserLastYear();
-    }
-    @ModelAttribute("avgRate")
-    public BigDecimal reviewsAvg() {
-        return statisticService.sumAllRatesOfUser();
-    }
+//    @ModelAttribute("reviewsMonths")
+//    public Map<YearMonth, Long> reviewsMonths() {
+//        return statisticService.sumAllReviewsOfUserLastMonth();
+//    }
+//
+//    @ModelAttribute("reviewsYears")
+//    public Map<Year, Long> reviewsYear() {
+//        return statisticService.sumAllReviewsOfUserLastYear();
+//    }
+//    @ModelAttribute("avgRate")
+//    public BigDecimal reviewsAvg() {
+//        return statisticService.sumAllRatesOfUser();
+//    }
 
 
     @GetMapping

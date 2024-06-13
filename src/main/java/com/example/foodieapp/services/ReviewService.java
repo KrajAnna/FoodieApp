@@ -4,7 +4,13 @@ import com.example.foodieapp.entity.Review;
 import com.example.foodieapp.repository.RestaurantRepository;
 import com.example.foodieapp.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -12,21 +18,21 @@ import java.util.*;
 
 @Service
 @RequiredArgsConstructor
-//@Transactional
+@Transactional
 public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final RestaurantRepository restaurantRepository;
     private final UserService userService;
 
 
-    public void addReview(Review review) {
-        review.setUser(userService.loggedUser());
+    public void addReview(Review review, UserDetails userDetails) {
+        review.setUser(userService.loggedUser(userDetails));
         reviewRepository.save(review);
     }
 
-    public void addReviewToRestaurant(Review review, Long restaurantId) {
-        review.setRestaurant(restaurantRepository.getById(restaurantId));
-        review.setUser(userService.loggedUser());
+    public void addReviewToRestaurant(Review review, Long restaurantId, UserDetails userDetails) {
+        review.setRestaurant(restaurantRepository.getReferenceById(restaurantId));
+        review.setUser(userService.loggedUser(userDetails));
         reviewRepository.save(review);
     }
 
@@ -36,13 +42,12 @@ public class ReviewService {
                 .toList();
     }
 
-    public List<ReviewRate> findAllReviewsOfUser(){
+    public List<ReviewRate> findAllReviewsOfUser(UserDetails userDetails) {
         return reviewRepository.findAllByReview().stream()
-                .filter(review -> review.getUser().equals(userService.loggedUser()))
+                .filter(review -> review.getUser().equals(userService.loggedUser(userDetails)))
                 .map(this::addRatingToReview)
                 .toList();
     }
-
 
 
     public BigDecimal ratingAvg(Review review) {
@@ -64,11 +69,13 @@ public class ReviewService {
     }
 
 
-    public ReviewRate findReview(Long id){
-        return new ReviewRate(reviewRepository.getById(id), ratingAvg(reviewRepository.getById(id)));
+    public ReviewRate findReview(Long id, UserDetails userDetails) {
+        Review review = reviewRepository.getReferenceById(id);
+        if(review.getUser().getEmail().equals(userDetails.getUsername())){
+            return new ReviewRate(review, ratingAvg(review));
+        }
+        return null;
     }
-
-
 
 
 

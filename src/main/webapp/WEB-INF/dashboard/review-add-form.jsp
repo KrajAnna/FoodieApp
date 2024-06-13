@@ -32,7 +32,7 @@
         <form:errors path="ratingFood"/>
         Service: <form:input type="number" name="ratingService" min="1" max="10" path="ratingService"/>
         <form:errors path="ratingService"/>
-        Vibe: <form:input type="number" name="ratingVibe" min="1" max="10" path="ratingVibe"/>
+        Price: <form:input type="number" name="ratingVibe" min="1" max="10" path="ratingVibe"/>
         <form:errors path="ratingVibe"/>
         General experience: <form:input type="number" name="ratingGenExperience" min="1" max="10" path="ratingGenExperience"/>
         <form:errors path="ratingGenExperience"/>

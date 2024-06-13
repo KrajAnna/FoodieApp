@@ -6,6 +6,8 @@ import com.example.foodieapp.services.RestaurantService;
 import com.example.foodieapp.services.ReviewService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,20 +22,19 @@ public class ReviewController {
     private final RestaurantService restaurantService;
     private final ReviewService reviewService;
 
-
     @ModelAttribute("restaurants")
     public List<Restaurant> restaurants() {
         return restaurantService.findAllRestaurants();
     }
 
     @GetMapping("")
-    public String yourReviewView(Model model) {
-        model.addAttribute("reviewRates", reviewService.findAllReviewsOfUser());
+    public String yourReviewView(Model model, @AuthenticationPrincipal UserDetails userDetails) {
+        model.addAttribute("reviewRates", reviewService.findAllReviewsOfUser(userDetails));
         return "dashboard/review-user";
     }
 
     @GetMapping("/all")
-    public String allReviewView(Model model) {
+    public String allReviewView(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         model.addAttribute("reviewRates", reviewService.findAllReviews());
         return "dashboard/review-all";
     }
@@ -45,17 +46,17 @@ public class ReviewController {
     }
 
     @PostMapping("/add")
-    public String addNewReview(@Valid Review review, BindingResult bindingResult) {
+    public String addNewReview(@Valid Review review, BindingResult bindingResult, @AuthenticationPrincipal UserDetails userDetails) {
         if (bindingResult.hasErrors()) {
             return "dashboard/review-add-form"; // TBD - unikalne nazwy w bazie danych
         }
-        reviewService.addReview(review);
+        reviewService.addReview(review, userDetails);
         return "dashboard/review-welcome";
     }
 
     @GetMapping("/{reviewId}")
-    public String checkReview(@PathVariable Long reviewId, Model model) {
-        model.addAttribute("reviewRate", reviewService.findReview(reviewId));
+    public String checkReview(@PathVariable Long reviewId, Model model, @AuthenticationPrincipal UserDetails userDetails ) {
+        model.addAttribute("reviewRate", reviewService.findReview(reviewId,  userDetails));
         return "dashboard/review-details";
 
     }

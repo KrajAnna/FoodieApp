@@ -14,25 +14,25 @@ import java.util.stream.Collectors;
 public class StatisticService {
     private final ReviewService reviewService;
 
-    public int sumAllReviewsOfUser() {
-        return reviewService.findAllReviewsOfUser().size();
-    }
+//    public int sumAllReviewsOfUser() {
+//        return reviewService.findAllReviewsOfUser().size();
+//    }
 
-    public Map<YearMonth, Long> sumAllReviewsOfUserLastMonth() {
-        return reviewService.findAllReviewsOfUser().stream()
-                .collect(Collectors.groupingBy(r -> YearMonth.from(r.getReview().getDate()), Collectors.counting()));
-    }
+//    public Map<YearMonth, Long> sumAllReviewsOfUserLastMonth() {
+//        return reviewService.findAllReviewsOfUser().stream()
+//                .collect(Collectors.groupingBy(r -> YearMonth.from(r.getReview().getDate()), Collectors.counting()));
+//    }
 
 
-    public Map<Year, Long> sumAllReviewsOfUserLastYear() {
-        return reviewService.findAllReviewsOfUser().stream()
-                .collect(Collectors.groupingBy(r -> Year.from(r.getReview().getDate()), Collectors.counting()));
-    }
+//    public Map<Year, Long> sumAllReviewsOfUserLastYear() {
+//        return reviewService.findAllReviewsOfUser().stream()
+//                .collect(Collectors.groupingBy(r -> Year.from(r.getReview().getDate()), Collectors.counting()));
+//    }
 
-    public BigDecimal sumAllRatesOfUser() {
-        return reviewService.findAllReviewsOfUser().stream()
-                .map(r -> reviewService.ratingAvg(r.getReview()))
-                .reduce(BigDecimal.ZERO, BigDecimal::add)
-                .divide(BigDecimal.valueOf(sumAllReviewsOfUser()), 2, BigDecimal.ROUND_HALF_UP); //średnia średniej :(
-    }
+//    public BigDecimal sumAllRatesOfUser() {
+//        return reviewService.findAllReviewsOfUser().stream()
+//                .map(r -> reviewService.ratingAvg(r.getReview()))
+//                .reduce(BigDecimal.ZERO, BigDecimal::add)
+//                .divide(BigDecimal.valueOf(sumAllReviewsOfUser()), 2, BigDecimal.ROUND_HALF_UP); //średnia średniej :(
+//    }
 }
