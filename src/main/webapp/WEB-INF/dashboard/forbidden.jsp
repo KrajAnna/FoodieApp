@@ -11,18 +11,14 @@
     <title>FoodieApp</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
 </head>
 <body>
-<%@include file="header.jsp"%>
+<%@include file="static_elements/headerLog.jsp" %>
 <div class="container mt-5">
-    <h3> Welcome in FoodieApp! </h3>
-    <h5>Let's get started</h5>
-<p>
-    <a href="/login" class="btn btn-primary mt-3">Login </a>
-
-    <a href="/home/signup" class="btn btn-primary mt-3"> Sign up</a>
-</p>
+    You are not authorized to see this content
+    <p>
+        <a href="/reviews" class="btn btn-primary mt-3">Go back to reviews </a>
+    </p>
 </div>
 </body>
 </html>

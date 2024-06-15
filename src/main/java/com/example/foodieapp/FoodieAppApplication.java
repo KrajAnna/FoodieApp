@@ -22,7 +22,7 @@ public class FoodieAppApplication extends SpringBootServletInitializer {
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/", "/login", "/home/**", "/WEB-INF/**", "/403").permitAll()
+                        .requestMatchers("/", "/app", "/login", "/home/**", "/WEB-INF/**", "/403").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin

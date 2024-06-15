@@ -3,48 +3,52 @@
 <html>
 <head>
     <title>Reviews</title>
-    <%--    <style>--%>
-    <%--        table {--%>
-    <%--            width: 100%;--%>
-    <%--            border-collapse: collapse;--%>
-    <%--        }--%>
-    <%--        th, td {--%>
-    <%--            border: 1px solid black;--%>
-    <%--            padding: 8px;--%>
-    <%--            text-align: left;--%>
-    <%--        }--%>
-    <%--        th {--%>
-    <%--            background-color: #f2f2f2;--%>
-    <%--        }--%>
-    <%--    </style>--%>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-<p>
-    All reviews:
-</p>
-<table>
-    <thead>
-    <tr>
-        <th>Restaurant</th>
-        <th>Date</th>
-        <th>Rating Total</th>
-        <th>Check details</th>
+<%@include file="static_elements/headerLog.jsp" %>
 
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach items="${reviewRates}" var="reviewRate">
-        <tr>
 
-            <td>${reviewRate.review.restaurant.name}</td>
-            <td>${reviewRate.review.date}</td>
-            <td>${reviewRate.rating}</td>
-            <td><a href="/reviews/${reviewRate.review.id}">View Details</a></td>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6 bg-light p-4 rounded shadow-sm">
+            <h4 class="text-dark text-center">Check all reviews</h4>
+        </div>
+    </div>
+</div>
 
-        </tr>
-    </c:forEach>
-    </tbody>
+<div class="container mt-2">
+    <div class="table-container">
+        <table class="table table-striped">
+            <thead class="table-dark">
+            <tr>
+                <th>Restaurant</th>
+                <th>Date</th>
+                <th>Rating Total</th>
+                <th>Check details</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach items="${reviewRates}" var="reviewRate">
+                <tr>
+                    <td>${reviewRate.review.restaurant.name}</td>
+                    <td>${reviewRate.review.date}</td>
+                    <td>${reviewRate.rating}</td>
+                    <td><a class="btn btn-sm btn-primary" href="/reviews/${reviewRate.review.id}">View Details</a></td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
 
-</table>
+</div>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6 bg-light p-4 rounded shadow-sm d-flex align-items-center justify-content-center">
+            <a href="/reviews/add" class="btn btn-secondary mt-3" >Add a new review!</a></br>
+        </div>
+    </div>
+</div>
 </body>
 </html>

@@ -25,7 +25,7 @@ public class StatisticController {
 //    public int reviewsTotal() {
 //        return statisticService.sumAllReviewsOfUser();
 //    }
-
+//
 //    @ModelAttribute("reviewsMonths")
 //    public Map<YearMonth, Long> reviewsMonths() {
 //        return statisticService.sumAllReviewsOfUserLastMonth();

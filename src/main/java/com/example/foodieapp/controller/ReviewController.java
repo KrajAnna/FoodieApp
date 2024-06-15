@@ -3,6 +3,7 @@ package com.example.foodieapp.controller;
 import com.example.foodieapp.entity.Restaurant;
 import com.example.foodieapp.entity.Review;
 import com.example.foodieapp.services.RestaurantService;
+import com.example.foodieapp.services.ReviewRate;
 import com.example.foodieapp.services.ReviewService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -56,8 +57,13 @@ public class ReviewController {
 
     @GetMapping("/{reviewId}")
     public String checkReview(@PathVariable Long reviewId, Model model, @AuthenticationPrincipal UserDetails userDetails ) {
-        model.addAttribute("reviewRate", reviewService.findReview(reviewId,  userDetails));
-        return "dashboard/review-details";
+        ReviewRate reviewRate = reviewService.findReview(reviewId,  userDetails);
+        if (reviewRate != null){
+            model.addAttribute("reviewRate", reviewRate);
+            return "dashboard/review-details";
+        }
+        return "dashboard/forbidden";
+
 
     }
 

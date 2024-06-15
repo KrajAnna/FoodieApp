@@ -38,7 +38,7 @@ public class HomeController {
             return "home/signup-form";
         }
         userService.saveUser(user);
-        model.addAttribute("name", user.getFirstName());
+        model.addAttribute("user", user);
         return "home/signup-welcome"; //
 
     }
