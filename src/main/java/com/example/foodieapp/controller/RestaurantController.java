@@ -53,7 +53,7 @@ public class RestaurantController {
 
     @GetMapping("/{restaurantId}")
     public String displayRestaurantDetails(@PathVariable Long restaurantId, Model model) {
-        model.addAttribute("reviewRates", restaurantService.findAllReviewsOfRestaurant(restaurantService.findRestaurantById(restaurantId)));
+        model.addAttribute("reviewRates", restaurantService.findAllReviewsByRestaurantId(restaurantId));
         return "dashboard/place-details";
     }
 

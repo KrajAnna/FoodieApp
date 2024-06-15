@@ -40,6 +40,12 @@ public class RestaurantService {
                 .toList();
     }
 
+    public List<ReviewRate> findAllReviewsByRestaurantId(Long restaurantId){
+        return reviewService.findAllReviews().stream()
+                .filter(review -> review.getReview().getRestaurant().getId().equals(restaurantId))
+                .toList();
+    }
+
     public Map<Restaurant,BigDecimal> restaurantRateMap(){
         return findAllRestaurants().stream()
                 .collect(Collectors.toMap(r->r, this::calculateRestaurantRate));
