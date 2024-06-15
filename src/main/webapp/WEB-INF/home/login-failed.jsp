@@ -9,11 +9,24 @@
 </head>
 <body>
 <%@include file="header.jsp"%>
-<h2>Login Failed</h2>
-<p>Invalid username or password. Please try again.</p>
-<a href="${pageContext.request.contextPath}/login">Go back to Login Page</a>
-<a href="${pageContext.request.contextPath}/home/signup">Sign up</a>
 
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6 bg-light p-4 rounded shadow-sm d-flex align-items-center justify-content-center">
+            <h2>Login Failed</h2>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6 bg-light p-4 rounded shadow-sm d-flex align-items-center justify-content-center">
+            <p> Invalid username or password. Please try again </p>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6 bg-light p-4 rounded shadow-sm d-flex align-items-center justify-content-center">
+            <a href="/login" class="btn btn-secondary">Login Page</a>
+            <a href="/home/signup" class="btn btn-secondary">Sign up</a>
+        </div>
+    </div>
 
 </body>
 </html>
