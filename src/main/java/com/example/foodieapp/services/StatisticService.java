@@ -20,13 +20,10 @@ public class StatisticService {
     private final ReviewRepository reviewRepository;
     private final UserRepository userRepository;
 
-    public int sumAllReviewsOfUser(UserDetails userDetails) {
-        return reviewService.findAllReviewsOfUser(userDetails).size();
-    }
+
     public int sumAllReviewsByUserId(UserDetails userDetails) {
         User user = userRepository.getByEmail(userDetails.getUsername());
         return reviewRepository.countReviewsByUserId(user.getId());
-      
     }
 
     public Map<YearMonth, Long> sumAllReviewsOfUserLastMonth(UserDetails userDetails) {
@@ -46,6 +43,6 @@ public class StatisticService {
         return reviewService.findAllReviewsOfUser(userDetails).stream()
                 .map(r -> reviewService.ratingAvg(r.getReview()))
                 .reduce(BigDecimal.ZERO, BigDecimal::add)
-                .divide(BigDecimal.valueOf(sumAllReviewsOfUser(userDetails)), 2, BigDecimal.ROUND_HALF_UP); //średnia średniej :(
+                .divide(BigDecimal.valueOf(sumAllReviewsByUserId(userDetails)), 2, BigDecimal.ROUND_HALF_UP); //średnia średniej :(
     }
 }

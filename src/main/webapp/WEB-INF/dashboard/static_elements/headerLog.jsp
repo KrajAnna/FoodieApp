@@ -18,7 +18,7 @@
                         <a class="nav-link active text-light" aria-current="page" href="/summary">Statistic</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active text-light" aria-current="page" href="/contact">Your account</a>
+                        <a class="nav-link active text-light" aria-current="page" href="/user">Your account</a>
                     </li>
                 </ul>
             </div>

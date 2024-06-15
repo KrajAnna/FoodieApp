@@ -27,6 +27,7 @@
                 <th>Date</th>
                 <th>Rating Total</th>
                 <th>Check details</th>
+                <th>Author</th>
             </tr>
             </thead>
             <tbody>
@@ -36,6 +37,7 @@
                     <td>${reviewRate.review.date}</td>
                     <td>${reviewRate.rating}</td>
                     <td><a class="btn btn-sm btn-primary" href="/reviews/${reviewRate.review.id}">View Details</a></td>
+                    <td>${reviewRate.review.user.firstName}</td>
                 </tr>
             </c:forEach>
             </tbody>

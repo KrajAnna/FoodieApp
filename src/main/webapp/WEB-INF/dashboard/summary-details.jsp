@@ -9,10 +9,13 @@
 <body>
 <%@include file="static_elements/headerLog.jsp" %>
 
-<div class="container mt-2">
-    <h3>
-        Here you can check your statistic:
-    </h3>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6 bg-light p-4 rounded shadow-sm">
+            <h4 class="text-dark text-center">Here you can check your statistic</h4>
+        </div>
+    </div>
 </div>
 
 <%--<div class="container mt-2">--%>
