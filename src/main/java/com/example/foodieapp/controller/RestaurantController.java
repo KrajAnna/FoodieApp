@@ -54,13 +54,14 @@ public class RestaurantController {
     @GetMapping("/{restaurantId}")
     public String displayRestaurantDetails(@PathVariable Long restaurantId, Model model) {
         model.addAttribute("reviewRates", restaurantService.findAllReviewsByRestaurantId(restaurantId));
+        model.addAttribute("restaurant", restaurantService.findRestaurantById(restaurantId));
         return "dashboard/place-details";
     }
 
     @GetMapping("/review/{restaurantId}")
     public String displayAddReviewForm(@PathVariable Long restaurantId, Model model) {
         model.addAttribute("restaurant", restaurantService.findRestaurantById(restaurantId));
-        model.addAttribute("review", new Review());
+        model.addAttribute( new Review());
         return "dashboard/place-add-review-form";
     }
 

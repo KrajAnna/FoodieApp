@@ -1,8 +1,10 @@
 package com.example.foodieapp.services;
 
 import com.example.foodieapp.entity.Review;
+import com.example.foodieapp.entity.User;
 import com.example.foodieapp.repository.RestaurantRepository;
 import com.example.foodieapp.repository.ReviewRepository;
+import com.example.foodieapp.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
@@ -22,17 +24,20 @@ import java.util.*;
 public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final RestaurantRepository restaurantRepository;
+    private final UserRepository userRepository;
     private final UserService userService;
 
 
     public void addReview(Review review, UserDetails userDetails) {
-        review.setUser(userService.loggedUser(userDetails));
+        User user = userRepository.getByEmail(userDetails.getUsername());
+        review.setUser(user);
         reviewRepository.save(review);
     }
 
     public void addReviewToRestaurant(Review review, Long restaurantId, UserDetails userDetails) {
+        User user = userRepository.getByEmail(userDetails.getUsername());
         review.setRestaurant(restaurantRepository.getReferenceById(restaurantId));
-        review.setUser(userService.loggedUser(userDetails));
+        review.setUser(user);
         reviewRepository.save(review);
     }
 
@@ -44,7 +49,7 @@ public class ReviewService {
 
     public List<ReviewRate> findAllReviewsOfUser(UserDetails userDetails) {
         return reviewRepository.findAllByReview().stream()
-                .filter(review -> review.getUser().equals(userService.loggedUser(userDetails)))
+                .filter(review -> review.getUser().equals(userRepository.getByEmail(userDetails.getUsername())))
                 .map(this::addRatingToReview)
                 .toList();
     }
