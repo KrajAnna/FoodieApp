@@ -3,6 +3,8 @@ package com.example.foodieapp.controller;
 import com.example.foodieapp.entity.Restaurant;
 import com.example.foodieapp.services.StatisticService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,24 +23,24 @@ import java.util.Map;
 public class StatisticController {
     private final StatisticService statisticService;
 
-//    @ModelAttribute("reviewsTotal")
-//    public int reviewsTotal() {
-//        return statisticService.sumAllReviewsOfUser();
-//    }
-//
-//    @ModelAttribute("reviewsMonths")
-//    public Map<YearMonth, Long> reviewsMonths() {
-//        return statisticService.sumAllReviewsOfUserLastMonth();
-//    }
-//
-//    @ModelAttribute("reviewsYears")
-//    public Map<Year, Long> reviewsYear() {
-//        return statisticService.sumAllReviewsOfUserLastYear();
-//    }
-//    @ModelAttribute("avgRate")
-//    public BigDecimal reviewsAvg() {
-//        return statisticService.sumAllRatesOfUser();
-//    }
+    @ModelAttribute("reviewsTotal")
+    public int reviewsTotal( @AuthenticationPrincipal UserDetails userDetails) {
+        return statisticService.sumAllReviewsByUserId(userDetails);
+    }
+
+    @ModelAttribute("reviewsMonths")
+    public Map<YearMonth, Long> reviewsMonths( @AuthenticationPrincipal UserDetails userDetails) {
+        return statisticService.sumAllReviewsOfUserLastMonth(userDetails);
+    }
+
+    @ModelAttribute("reviewsYears")
+    public Map<Year, Long> reviewsYear( @AuthenticationPrincipal UserDetails userDetails) {
+        return statisticService.sumAllReviewsOfUserLastYear(userDetails);
+    }
+    @ModelAttribute("avgRate")
+    public BigDecimal reviewsAvg( @AuthenticationPrincipal UserDetails userDetails) {
+        return statisticService.sumAllRatesOfUser(userDetails);
+    }
 
 
     @GetMapping

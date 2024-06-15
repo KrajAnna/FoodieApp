@@ -18,4 +18,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     @Query("SELECT r FROM Review r JOIN FETCH r.restaurant")
     List<Review> findAllByReview();
 
+    @Query("SELECT COUNT(r) FROM Review r WHERE r.user.id = :userId")
+    int countReviewsByUserId(@Param("userId") Long userId);
+
 }
