@@ -47,8 +47,14 @@
 <div class="container mt-4">
     <div class="row justify-content-center">
         <div class="col-md-6 bg-light p-4 rounded shadow-sm d-flex align-items-center justify-content-center">
-            <a href="/reviews" class="btn btn-secondary mt-3">Go back to the reviews list!</a></br>
+            <a href="/reviews" class="btn btn-secondary mt-3">Go back to the reviews list</a></br>
         </div>
+<%--        <div class="col-md-6 bg-light p-4 rounded shadow-sm d-flex align-items-center justify-content-center">--%>
+<%--            <form th: action="/logout" method="post">--%>
+<%--                <button type="submit">Wyloguj się</button>--%>
+<%--            </form>--%>
+<%--            <a href="/logout" class="btn btn-secondary mt-3">Log out</a></br>--%>
+<%--        </div>--%>
     </div>
 </div>
 </body>

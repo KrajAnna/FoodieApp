@@ -31,6 +31,12 @@ public class FoodieAppApplication extends SpringBootServletInitializer {
                         .defaultSuccessUrl("/reviews")
                         .permitAll()
                 )
+                .logout(logout -> logout
+                        .logoutUrl("/logout") // ścieżka do wylogowania
+                        .logoutSuccessUrl("/logoutSuccess") // przekierowanie po wylogowaniu
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
+                )
                 .exceptionHandling(exceptionHandling -> exceptionHandling
                         .accessDeniedPage("/403"))
                 .build();
