@@ -24,5 +24,3 @@ This project is developed with the following enhancements planned for future ver
 2. **Photo Attachments**: Allow users to upload and attach photos to each visit for a more personalized experience.
 3. **Followers and Social Features**: Introduce functionality for following other users, sharing experiences, and building a community.
 4. **View Migration to Thymeleaf**: Replace JSP views with Thymeleaf templates for a more flexible and modern UI.
-
-## Getting Started
