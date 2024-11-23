@@ -19,6 +19,11 @@ public class LoginController {
         return "home/login-failed";
     }
 
+    @GetMapping("/logout")
+    public String logoutPage() {
+        return "home/logout-welcome";
+    }
+
 
 
 }
