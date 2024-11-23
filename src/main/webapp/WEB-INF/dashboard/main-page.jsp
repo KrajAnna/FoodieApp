@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://jakarta.apache.org/taglibs/jstl/core" prefix="c" %>
+
 <html>
 <head>
     <title>Foodie App</title>
@@ -15,7 +17,7 @@
 <body>
 <%@include file="static_elements/headerLog.jsp"%>
 <p>
-Tu bedzie lista 5 ostatnich recenzji: </br>
+Explore: </br>
 
 </br>
     <a href="/places">Miejsca</a></br>
