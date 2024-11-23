@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/app")
+@RequestMapping("")
 public class DashboardController {
 
     @GetMapping("")
     public String welcomeApp() {
-        return "dashboard/main-page";
+        return "home/home-page";
     }
 
 

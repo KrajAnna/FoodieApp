@@ -3,6 +3,8 @@ package com.example.foodieapp.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 
 import java.util.List;
@@ -19,4 +21,5 @@ public class Restaurant {
     private String address;
     @OneToMany (mappedBy = "restaurant")
     private List<Review> reviews;
+
 }

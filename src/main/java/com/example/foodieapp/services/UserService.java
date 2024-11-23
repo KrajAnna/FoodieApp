@@ -30,8 +30,6 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
 
-
-
     public void saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         RoleEntity userRole = roleRepository.findByName(Role.USER);

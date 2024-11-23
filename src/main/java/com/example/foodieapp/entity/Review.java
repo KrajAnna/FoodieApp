@@ -3,6 +3,8 @@ package com.example.foodieapp.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
@@ -28,6 +30,5 @@ public class Review {
 
     @ManyToOne
     private Restaurant restaurant;
-
 
 }

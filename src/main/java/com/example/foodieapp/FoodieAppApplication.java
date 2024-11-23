@@ -1,5 +1,6 @@
 package com.example.foodieapp;
 
+import jakarta.servlet.DispatcherType;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
@@ -22,7 +23,8 @@ public class FoodieAppApplication extends SpringBootServletInitializer {
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/", "/app", "/login", "/home/**", "/WEB-INF/**", "/403").permitAll()
+//                        .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
+                        .requestMatchers("/", "/app", "/error","/login", "/403").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin

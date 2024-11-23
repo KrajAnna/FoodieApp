@@ -21,6 +21,7 @@ public class StatisticService {
     private final UserRepository userRepository;
 
 
+
     public int sumAllReviewsByUserId(UserDetails userDetails) {
         User user = userRepository.getByEmail(userDetails.getUsername());
         return reviewRepository.countReviewsByUserId(user.getId());
