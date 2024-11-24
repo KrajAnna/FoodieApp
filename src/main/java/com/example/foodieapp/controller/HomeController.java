@@ -15,24 +15,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-@RequestMapping("/home")
+@RequestMapping("/signup")
 @RequiredArgsConstructor
 public class HomeController {
 
     private final UserService userService;
 
     @GetMapping("")
-    public String helloApp() {
-        return "home/home-page";
-    }
-
-    @GetMapping("/signup")
     public String signup(Model model) {
         model.addAttribute("user", new User());
         return "home/signup-form";
     }
 
-    @PostMapping("/signup")
+    @PostMapping("")
     public String loginForm(@Valid User user, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "home/signup-form";
