@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -22,6 +23,12 @@ public class RestaurantService {
 
     public List<Restaurant> findAllRestaurants() {
         return restaurantRepository.findAll();
+    }
+
+    public List<Restaurant> sortRestaurants(){
+        return findAllRestaurants().stream()
+                .sorted(Comparator.comparing(Restaurant::getName))
+                .toList();
     }
 
     public Restaurant findRestaurantById(Long id) {

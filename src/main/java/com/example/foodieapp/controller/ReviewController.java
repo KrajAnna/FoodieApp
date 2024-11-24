@@ -25,7 +25,7 @@ public class ReviewController {
 
     @ModelAttribute("restaurants")
     public List<Restaurant> restaurants() {
-        return restaurantService.findAllRestaurants();
+        return restaurantService.sortRestaurants();
     }
 
     @GetMapping("")
