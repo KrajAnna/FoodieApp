@@ -10,23 +10,27 @@ COPY pom.xml .
 # Make mvnw executable
 RUN chmod +x mvnw
 
+# Download dependencies first (this layer can be cached)
+RUN ./mvnw dependency:go-offline
+
 # Copy source code
 COPY src src
 
 # Build the application
-RUN ./mvnw install -DskipTests
+RUN ./mvnw package -DskipTests
 
-# Final stage
+# Runtime stage
 FROM eclipse-temurin:21-jre-alpine
-VOLUME /tmp
+WORKDIR /app
 
-# Copy the jar file
+# Copy the jar file from build stage
 COPY --from=build /workspace/app/target/*.jar app.jar
 
-# Create the correct directory structure for JSP files
-RUN mkdir -p /BOOT-INF/classes/META-INF/resources/WEB-INF/
+# Configure JVM options
+ENV JAVA_OPTS="-Xmx512m -Xms256m"
 
-# Copy the entire WEB-INF directory structure
-COPY src/main/webapp/WEB-INF/ /BOOT-INF/classes/META-INF/resources/WEB-INF/
+# Expose the application port
+EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+# Run the application
+ENTRYPOINT ["sh", "-c", "java ${JAVA_OPTS} -jar app.jar"]
