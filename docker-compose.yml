@@ -10,6 +10,17 @@ services:
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
       - LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_SECURITY=DEBUG
+      - SPRING_JPA_PROPERTIES_HIBERNATE_JDBC_BATCH_SIZE=5
+      - SPRING_JPA_PROPERTIES_HIBERNATE_JDBC_FETCH_SIZE=50
+      - SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE=5
+      - SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE=2
+      - JAVA_OPTS=-Xmx256m -Xms128m -XX:+UseContainerSupport -XX:MaxRAMPercentage=50
+    deploy:
+      resources:
+        limits:
+          memory: 300M
+        reservations:
+          memory: 200M
     depends_on:
       db:
         condition: service_healthy
@@ -24,6 +35,16 @@ services:
       - MYSQL_ROOT_PASSWORD=password123
       - MYSQL_DATABASE=foodieApp
       - MYSQL_ROOT_HOST=%
+      - MYSQL_INNODB_BUFFER_POOL_SIZE=64M
+      - MYSQL_INNODB_LOG_FILE_SIZE=16M
+      - MYSQL_MAX_CONNECTIONS=10
+      - MYSQL_PERFORMANCE_SCHEMA=OFF
+    deploy:
+      resources:
+        limits:
+          memory: 400M
+        reservations:
+          memory: 300M
     volumes:
       - mysql-data:/var/lib/mysql
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
@@ -35,18 +56,6 @@ services:
       interval: 1s
       timeout: 20s
       retries: 10
-
-  adminer:
-    image: adminer
-    ports:
-      - "8081:8080"
-    environment:
-      - ADMINER_DEFAULT_SERVER=db
-    depends_on:
-      - db
-    networks:
-      - foodie-network
-    restart: unless-stopped
 
 volumes:
   mysql-data:
