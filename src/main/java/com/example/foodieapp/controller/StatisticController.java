@@ -42,9 +42,10 @@ public class StatisticController {
         return statisticService.sumAllRatesOfUser(userDetails);
     }
 
-
     @GetMapping
     public String showSummary(Model model){
         return "dashboard/summary-details";
     }
+
+
 }

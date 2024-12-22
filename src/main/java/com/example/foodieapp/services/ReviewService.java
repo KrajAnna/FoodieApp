@@ -62,6 +62,17 @@ public class ReviewService {
         return bd.setScale(2, RoundingMode.HALF_UP);
     }
 
+    public Optional <BigDecimal> ratingAvgForStats(Review review) {
+        List<Integer> ratings = getAllRatings(review);
+        if (ratings.isEmpty()) {
+            return Optional.empty();
+        }
+        int sum = getAllRatings(review).stream().mapToInt(Integer::intValue).sum();
+        double avg = (double) sum / getAllRatings(review).size();
+        BigDecimal bd = BigDecimal.valueOf(avg);
+        return Optional.of(bd.setScale(2, RoundingMode.HALF_UP));
+    }
+
     public List<Integer> getAllRatings(Review review) {
         return List.of(review.getRatingService(),
                 review.getRatingVibe(),
