@@ -24,7 +24,7 @@ public class FoodieAppApplication extends SpringBootServletInitializer {
         return http
                 .authorizeHttpRequests(authorize -> authorize
 //                        .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
-                        .requestMatchers("/", "/app", "/signup", "/home", "/error","/login", "/403").permitAll()
+                        .requestMatchers("/", "/app", "/signup", "/home", "/error","/login", "/403", "/logoutSuccess").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin

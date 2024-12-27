@@ -34,9 +34,12 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         RoleEntity userRole = roleRepository.findByName(Role.USER);
         user.setRoles(Set.of(userRole));
-
         userRepository.save(user);
+    }
 
+    public void editUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
     }
 
     public String getCurrentUserEmail(UserDetails userDetails) {

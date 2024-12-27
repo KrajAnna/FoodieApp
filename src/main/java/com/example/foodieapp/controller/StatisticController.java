@@ -24,21 +24,21 @@ public class StatisticController {
     private final StatisticService statisticService;
 
     @ModelAttribute("reviewsTotal")
-    public int reviewsTotal( @AuthenticationPrincipal UserDetails userDetails) {
+    protected int reviewsTotal( @AuthenticationPrincipal UserDetails userDetails) {
         return statisticService.sumAllReviewsByUserId(userDetails);
     }
 
     @ModelAttribute("reviewsMonths")
-    public Map<YearMonth, Long> reviewsMonths( @AuthenticationPrincipal UserDetails userDetails) {
+    protected Map<YearMonth, Long> reviewsMonths( @AuthenticationPrincipal UserDetails userDetails) {
         return statisticService.sumAllReviewsOfUserLastMonth(userDetails);
     }
 
     @ModelAttribute("reviewsYears")
-    public Map<Year, Long> reviewsYear( @AuthenticationPrincipal UserDetails userDetails) {
+    protected Map<Year, Long> reviewsYear( @AuthenticationPrincipal UserDetails userDetails) {
         return statisticService.sumAllReviewsOfUserLastYear(userDetails);
     }
     @ModelAttribute("avgRate")
-    public BigDecimal reviewsAvg( @AuthenticationPrincipal UserDetails userDetails) {
+    protected BigDecimal reviewsAvg( @AuthenticationPrincipal UserDetails userDetails) {
         return statisticService.sumAllRatesOfUser(userDetails);
     }
 

@@ -19,11 +19,10 @@ public class LoginController {
         return "home/login-failed";
     }
 
-    @GetMapping("/logout")
+    @GetMapping("/logoutSuccess")
     public String logoutPage() {
-        return "home/logout-welcome";
+        return "home/logout-success";
     }
-
 
 
 }
