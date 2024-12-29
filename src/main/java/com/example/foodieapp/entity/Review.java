@@ -1,6 +1,8 @@
 package com.example.foodieapp.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.Getter;
@@ -18,7 +20,9 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    private LocalDate date; //automatycznie dodana podczas zapisu
+    private LocalDate date;
+    @Min(1)
+    @Max(10)
     private int ratingFood; // miedzy 1-10
     private int ratingService; // miedzy 1-10
     private int ratingVibe; // miedzy 1-10

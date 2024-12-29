@@ -26,7 +26,7 @@
     <div class="container mt-2">
         <div class="mb-3">
             <label for="date" class="form-label"><strong>Date</strong></label>
-            <input type="date" th:field="*{date}" id="date" class="form-control"/>
+            <input type="date" th:field="*{date}" id="date" class="form-control" required/>
             <div th:if="${#fields.hasErrors('date')}" class="text-danger">
                 <span th:errors="*{date}"></span>
             </div>

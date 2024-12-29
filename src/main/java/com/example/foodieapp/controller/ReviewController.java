@@ -49,7 +49,7 @@ public class ReviewController {
     @PostMapping("/add")
     public String addNewReview(@Valid Review review, BindingResult bindingResult, @AuthenticationPrincipal UserDetails userDetails) {
         if (bindingResult.hasErrors()) {
-            return "dashboard/review-add-form"; // TBD - unikalne nazwy w bazie danych
+            return "dashboard/review-add-form"; //
         }
         reviewService.addReview(review, userDetails);
         return "dashboard/review-welcome";
