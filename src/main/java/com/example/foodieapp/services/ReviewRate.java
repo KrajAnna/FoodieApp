@@ -11,5 +11,6 @@ import java.math.BigDecimal;
 public class ReviewRate {
     private Review review;
     private BigDecimal rating;
+    private boolean editable;
 
 }

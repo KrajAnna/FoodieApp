@@ -5,6 +5,7 @@ import com.example.foodieapp.entity.User;
 import com.example.foodieapp.repository.RestaurantRepository;
 import com.example.foodieapp.repository.ReviewRepository;
 import com.example.foodieapp.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
@@ -26,16 +27,17 @@ public class ReviewService {
     private final RestaurantRepository restaurantRepository;
     private final UserRepository userRepository;
     private final UserService userService;
+    private final CurrentUserProvider currentUserProvider;
 
 
-    public void addReview(Review review, UserDetails userDetails) {
-        User user = userRepository.getByEmail(userDetails.getUsername());
+    public void addReview(Review review) {
+        User user = currentUserProvider.getCurrentUser();
         review.setUser(user);
         reviewRepository.save(review);
     }
 
     public void addReviewToRestaurant(Review review, Long restaurantId, UserDetails userDetails) {
-        User user = userRepository.getByEmail(userDetails.getUsername());
+        User user = currentUserProvider.getCurrentUser();
         review.setRestaurant(restaurantRepository.getReferenceById(restaurantId));
         review.setUser(user);
         reviewRepository.save(review);
@@ -47,9 +49,9 @@ public class ReviewService {
                 .toList();
     }
 
-    public List<ReviewRate> findAllReviewsOfUser(UserDetails userDetails) {
+    public List<ReviewRate> findAllReviewsOfUser() {
         return reviewRepository.findAllByReview().stream()
-                .filter(review -> review.getUser().equals(userRepository.getByEmail(userDetails.getUsername())))
+                .filter(review -> review.getUser().equals(currentUserProvider.getCurrentUser()))
                 .map(this::addRatingToReview)
                 .toList();
     }
@@ -81,17 +83,33 @@ public class ReviewService {
     }
 
     public ReviewRate addRatingToReview(Review review) {
-        return new ReviewRate(review, ratingAvg(review));
+        return new ReviewRate(review, ratingAvg(review), true);
     }
 
 
-    public ReviewRate findReview(Long id, UserDetails userDetails) {
-        Review review = reviewRepository.getReferenceById(id);
-        if(review.getUser().getEmail().equals(userDetails.getUsername())){
-            return new ReviewRate(review, ratingAvg(review));
+    public ReviewRate findReview(Long id) {
+        Review review = reviewRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Entity Not Found"));
+        boolean isEditable = review.getUser().equals(currentUserProvider.getCurrentUser());
+        return new ReviewRate(review,ratingAvg(review),isEditable);
+    }
+
+    public Review findReviewRaw(Long id) {
+        Review review = reviewRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Entity Not Found"));
+        if (!review.getUser().equals(currentUserProvider.getCurrentUser())){
+            throw new  AccessDeniedException("You do not have permission to view this content");
         }
-        return null;
+        return review;
     }
+
+    public ReviewRate findReviewToEdit(Long id) {
+        Review review = reviewRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Entity Not Found"));
+        if (!review.getUser().equals(currentUserProvider.getCurrentUser())){
+            throw new  AccessDeniedException("You do not have permission to view this content");
+        }
+        return new ReviewRate(review,ratingAvg(review),true);
+
+    }
+
 
 
 

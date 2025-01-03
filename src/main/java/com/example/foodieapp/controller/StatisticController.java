@@ -30,7 +30,7 @@ public class StatisticController {
 
     @ModelAttribute("reviewsMonths")
     protected Map<YearMonth, Long> reviewsMonths( @AuthenticationPrincipal UserDetails userDetails) {
-        return statisticService.sumAllReviewsOfUserLastMonth(userDetails);
+        return statisticService.sumAllReviewsOfUserLastMonth();
     }
 
     @ModelAttribute("reviewsYears")
