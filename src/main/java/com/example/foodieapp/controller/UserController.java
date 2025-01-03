@@ -2,6 +2,7 @@ package com.example.foodieapp.controller;
 
 import com.example.foodieapp.entity.Restaurant;
 import com.example.foodieapp.entity.User;
+import com.example.foodieapp.services.CurrentUserProvider;
 import com.example.foodieapp.services.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,10 +21,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private final CurrentUserProvider currentUserProvider;
 
     @ModelAttribute("user")
     protected User getModelUser( @AuthenticationPrincipal UserDetails userDetails){
-        return userService.loggedUser(userDetails);
+        return currentUserProvider.getCurrentLoggedUser();
     }
 
     @GetMapping("")

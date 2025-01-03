@@ -28,21 +28,21 @@ public class StatisticService {
         return reviewRepository.countReviewsByUserId(user.getId());
     }
 
-    public Map<YearMonth, Long> sumAllReviewsOfUserLastMonth(UserDetails userDetails) {
-        return reviewService.findAllReviewsOfUser(userDetails).stream()
+    public Map<YearMonth, Long> sumAllReviewsOfUserLastMonth( ) {
+        return reviewService.findAllReviewsOfUser().stream()
                 .filter(r-> r.getReview().getDate() != null)
                 .collect(Collectors.groupingBy(r -> YearMonth.from(r.getReview().getDate()), Collectors.counting()));
     }
 
 
     public Map<Year, Long> sumAllReviewsOfUserLastYear(UserDetails userDetails) {
-        return reviewService.findAllReviewsOfUser(userDetails).stream()
+        return reviewService.findAllReviewsOfUser().stream()
                 .filter(rr-> rr.getReview().getDate() != null)
                 .collect(Collectors.groupingBy(r -> Year.from(r.getReview().getDate()), Collectors.counting()));
     }
 
     public BigDecimal sumAllRatesOfUser(UserDetails userDetails) {
-        BigDecimal totalRating = reviewService.findAllReviewsOfUser(userDetails).stream()
+        BigDecimal totalRating = reviewService.findAllReviewsOfUser().stream()
                 .map(r -> reviewService.ratingAvgForStats(r.getReview()))
                 .flatMap(r-> r.isPresent() ? Stream.of(r.get()) : Stream.empty() )
                 .reduce(BigDecimal.ZERO, BigDecimal::add);

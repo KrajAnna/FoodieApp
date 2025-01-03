@@ -56,9 +56,5 @@ public class UserService {
         return userRepository.findByEmail(email).get().getId();
     }
 
-    public User loggedUser(UserDetails userDetails) {
-        return userRepository.getByEmail(userDetails.getUsername());
-    }
-
 
 }
