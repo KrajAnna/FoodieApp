@@ -2,7 +2,7 @@ package com.example.foodieapp.controller;
 
 import com.example.foodieapp.entity.Restaurant;
 import com.example.foodieapp.entity.Review;
-import com.example.foodieapp.repository.RestaurantRepository;
+import com.example.foodieapp.exception.RestaurantAlreadyExistsException;
 import com.example.foodieapp.services.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -13,8 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.List;
 
 @RequestMapping("/places")
@@ -43,12 +41,18 @@ public class RestaurantController {
     }
 
     @PostMapping("/add")
-    public String addNewPlace(@Valid Restaurant restaurant, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "dashboard/place-add-form"; // TBD - unikalne nazwy w bazie danych
+    public String addNewPlace(@Valid Restaurant restaurant, BindingResult bindingResult, Model model) {
+        try {
+            if (bindingResult.hasErrors()) {
+                return "dashboard/place-add-form";
+            }
+            restaurantService.addRestaurant(restaurant);
+            return "dashboard/place-welcome";
+        } catch (RestaurantAlreadyExistsException e) {
+            model.addAttribute("massage", e.getMessage());
+            return "dashboard/place-add-error";
         }
-        restaurantService.addRestaurant(restaurant);
-        return "dashboard/place-welcome";
+
     }
 
     @GetMapping("/{restaurantId}")
@@ -61,12 +65,12 @@ public class RestaurantController {
     @GetMapping("/review/{restaurantId}")
     public String displayAddReviewForm(@PathVariable Long restaurantId, Model model) {
         model.addAttribute("restaurant", restaurantService.findRestaurantById(restaurantId));
-        model.addAttribute( new Review());
+        model.addAttribute(new Review());
         return "dashboard/place-add-review-form";
     }
 
     @PostMapping("/review/{restaurantId}")
-    public String addReviewToRestaurant(@PathVariable Long restaurantId, @Valid Review review, BindingResult bindingResult, @AuthenticationPrincipal UserDetails userDetails){
+    public String addReviewToRestaurant(@PathVariable Long restaurantId, @Valid Review review, BindingResult bindingResult, @AuthenticationPrincipal UserDetails userDetails) {
         if (bindingResult.hasErrors()) {
             return "dashboard/place-add-review-form";
         }

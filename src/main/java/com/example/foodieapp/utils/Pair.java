@@ -1,4 +1,4 @@
-package com.example.foodieapp.services;
+package com.example.foodieapp.utils;
 
 public record Pair<L, R>(L left, R right) {
     public static <L, R> Pair<L, R> of(L left, R right) {

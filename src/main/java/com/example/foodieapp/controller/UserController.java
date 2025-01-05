@@ -1,8 +1,7 @@
 package com.example.foodieapp.controller;
 
-import com.example.foodieapp.entity.Restaurant;
 import com.example.foodieapp.entity.User;
-import com.example.foodieapp.services.CurrentUserProvider;
+import com.example.foodieapp.utils.CurrentUserProvider;
 import com.example.foodieapp.services.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

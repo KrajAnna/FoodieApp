@@ -1,7 +1,9 @@
 package com.example.foodieapp.services;
 
 import com.example.foodieapp.entity.Restaurant;
+import com.example.foodieapp.exception.RestaurantAlreadyExistsException;
 import com.example.foodieapp.repository.RestaurantRepository;
+import com.example.foodieapp.utils.ReviewRate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +11,7 @@ import java.math.BigDecimal;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,7 +21,17 @@ public class RestaurantService {
     private final ReviewService reviewService;
 
     public void addRestaurant(Restaurant restaurant) {
-        restaurantRepository.save(restaurant);
+        if (!checkIfRestaurantAlreadyAdded(restaurant)) {
+            restaurantRepository.save(restaurant);
+        } else {
+            throw new RestaurantAlreadyExistsException(
+                    "Restaurant " + restaurant.getName() + " already exists.");
+        }
+    }
+
+    public boolean checkIfRestaurantAlreadyAdded (Restaurant restaurant){
+        Optional<Restaurant> addedRestaurant = restaurantRepository.findByName(restaurant.getName());
+        return addedRestaurant.isPresent();
     }
 
     public List<Restaurant> findAllRestaurants() {
@@ -32,7 +45,7 @@ public class RestaurantService {
     }
 
     public Restaurant findRestaurantById(Long id) {
-        return restaurantRepository.getById(id);
+        return restaurantRepository.getReferenceById(id);
     }
 
     public BigDecimal calculateRestaurantRate(Restaurant restaurant){
@@ -61,3 +74,4 @@ public class RestaurantService {
 
 
 }
+

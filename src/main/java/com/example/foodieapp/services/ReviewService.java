@@ -5,13 +5,12 @@ import com.example.foodieapp.entity.User;
 import com.example.foodieapp.repository.RestaurantRepository;
 import com.example.foodieapp.repository.ReviewRepository;
 import com.example.foodieapp.repository.UserRepository;
+import com.example.foodieapp.utils.CurrentUserProvider;
+import com.example.foodieapp.utils.ReviewRate;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,4 +1,4 @@
-package com.example.foodieapp.services;
+package com.example.foodieapp.utils;
 
 import com.example.foodieapp.entity.Review;
 import lombok.AllArgsConstructor;
