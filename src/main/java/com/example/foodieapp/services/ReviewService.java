@@ -45,6 +45,7 @@ public class ReviewService {
     public List<ReviewRate> findAllReviews() {
         return reviewRepository.findAllByReview().stream()
                 .map(this::addRatingToReview)
+                .sorted((r1, r2) -> r2.getReview().getDate().compareTo(r1.getReview().getDate()))
                 .toList();
     }
 
@@ -52,6 +53,7 @@ public class ReviewService {
         return reviewRepository.findAllByReview().stream()
                 .filter(review -> review.getUser().equals(currentUserProvider.getCurrentUser()))
                 .map(this::addRatingToReview)
+                .sorted((r1, r2) -> r2.getReview().getDate().compareTo(r1.getReview().getDate()))
                 .toList();
     }
 
