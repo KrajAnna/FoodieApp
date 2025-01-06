@@ -13,5 +13,10 @@ public class DashboardController {
         return "home/home-page";
     }
 
+    @GetMapping("/about")
+    public String aboutApp() {
+        return "dashboard/about-page";
+    }
+
 
 }
