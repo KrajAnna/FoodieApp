@@ -11,87 +11,85 @@
 
 
 <header th:replace="fragments/headerLog :: header"></header>
+<form th:action="@{/reviews/{id}/edit(id=${review.id})}" th:object="${review}" method="post">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-md-12 bg-light p-4 rounded shadow-sm">
+                <h4 class="text-dark">Edit visit</h4>
+                <h5 class="text-dark"><span th:text="${review.restaurant.name}"></span> <span th:text="${review.date}"></span></h5>
 
-<div class="container mt-4">
-    <div class="row justify-content-center">
-        <div class="col-md-6 bg-light p-4 rounded shadow-sm">
-            <h4 class="text-dark text-center">Editing the review for the restaurant: <span th:text="${review.restaurant.name}"></span></h4>
-        </div>
-    </div>
-</div>
+                <input type="hidden" th:field="*{id}"/>
+                <input type="hidden" th:field="*{restaurant.id}" />
+                <input type="hidden" th:field="*{date}" />
 
-<form th:action="@{/reviews/add}" th:object="${review}" method="post">
-    <input type="hidden" th:field="*{id}"/>
+<!--                <div class="mb-3">-->
+<!--                    <label for="date" class="form-label"><strong>Date</strong></label>-->
+<!--                    <input type="date" th:field="*{date}" id="date" class="form-control" required/>-->
+<!--                    <div th:if="${#fields.hasErrors('date')}" class="text-danger">-->
+<!--                        <span th:errors="*{date}"></span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <hr/>-->
 
-    <div class="container mt-2">
-        <div class="mb-3">
-            <label for="date" class="form-label"><strong>Date</strong></label>
-            <input type="date" th:field="*{date}" id="date" class="form-control" required/>
-            <div th:if="${#fields.hasErrors('date')}" class="text-danger">
-                <span th:errors="*{date}"></span>
+                <!--        <div class="mb-3">-->
+                <!--            <label for="restaurant" class="form-label"><strong>Restaurant</strong></label>-->
+                <!--            <select th:field="*{restaurant}" class="form-control">-->
+                <!--                <option th:each="restaurant : ${restaurants}" th:value="${restaurant.id}" th:text="${restaurant.name}"></option>-->
+                <!--            </select>-->
+                <!--            <small> <a th:href="@{/places/add}" class="btn btn-sm btn-secondary">Add Restaurant</a></small>-->
+                <!--        </div>-->
+                <!--        <hr/>-->
+
+                <div class="mb-3">
+                    <label for="description" class="form-label"><strong>Description</strong></label>
+                    <textarea th:field="*{description}" id="description" class="form-control"></textarea>
+                    <div th:if="${#fields.hasErrors('description')}" class="text-danger">
+                        <span th:errors="*{description}"></span>
+                    </div>
+                </div>
+                <hr/>
+
+                <div class="mb-3">
+                    <label class="form-label"></label>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="ratingFood" class="form-label">Food:</label>
+                            <input type="number" th:field="*{ratingFood}" min="1" max="10" class="form-control"/>
+                            <div th:if="${#fields.hasErrors('ratingFood')}" class="text-danger">
+                                <span th:errors="*{ratingFood}"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="ratingService" class="form-label">Service:</label>
+                            <input type="number" th:field="*{ratingService}" min="1" max="10" class="form-control"/>
+                            <div th:if="${#fields.hasErrors('ratingService')}" class="text-danger">
+                                <span th:errors="*{ratingService}"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="ratingVibe" class="form-label">Price:</label>
+                            <input type="number" th:field="*{ratingVibe}" min="1" max="10" class="form-control"/>
+                            <div th:if="${#fields.hasErrors('ratingVibe')}" class="text-danger">
+                                <span th:errors="*{ratingVibe}"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="ratingGenExperience" class="form-label">General experience:</label>
+                            <input type="number" th:field="*{ratingGenExperience}" min="1" max="10"
+                                   class="form-control"/>
+                            <div th:if="${#fields.hasErrors('ratingGenExperience')}" class="text-danger">
+                                <span th:errors="*{ratingGenExperience}"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr/>
+                <button type="submit" class="btn btn-secondary mt-3">Save</button>
             </div>
         </div>
-        <hr/>
-
-<!--        <div class="mb-3">-->
-<!--            <label for="restaurant" class="form-label"><strong>Restaurant</strong></label>-->
-<!--            <select th:field="*{restaurant}" class="form-control">-->
-<!--                <option th:each="restaurant : ${restaurants}" th:value="${restaurant.id}" th:text="${restaurant.name}"></option>-->
-<!--            </select>-->
-<!--            <small> <a th:href="@{/places/add}" class="btn btn-sm btn-secondary">Add Restaurant</a></small>-->
-<!--        </div>-->
-<!--        <hr/>-->
-
-        <div class="mb-3">
-            <label for="description" class="form-label"><strong>Description</strong></label>
-            <textarea th:field="*{description}" id="description" class="form-control"></textarea>
-            <div th:if="${#fields.hasErrors('description')}" class="text-danger">
-                <span th:errors="*{description}"></span>
-            </div>
-        </div>
-        <hr/>
-
-        <div class="mb-3">
-            <label class="form-label"></label>
-            <div class="row">
-                <div class="col-md-3">
-                    <label for="ratingFood" class="form-label">Food:</label>
-                    <input type="number" th:field="*{ratingFood}" min="1" max="10" class="form-control"/>
-                    <div th:if="${#fields.hasErrors('ratingFood')}" class="text-danger">
-                        <span th:errors="*{ratingFood}"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <label for="ratingService" class="form-label">Service:</label>
-                    <input type="number" th:field="*{ratingService}" min="1" max="10" class="form-control"/>
-                    <div th:if="${#fields.hasErrors('ratingService')}" class="text-danger">
-                        <span th:errors="*{ratingService}"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <label for="ratingVibe" class="form-label">Price:</label>
-                    <input type="number" th:field="*{ratingVibe}" min="1" max="10" class="form-control"/>
-                    <div th:if="${#fields.hasErrors('ratingVibe')}" class="text-danger">
-                        <span th:errors="*{ratingVibe}"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <label for="ratingGenExperience" class="form-label">General experience:</label>
-                    <input type="number" th:field="*{ratingGenExperience}" min="1" max="10" class="form-control"/>
-                    <div th:if="${#fields.hasErrors('ratingGenExperience')}" class="text-danger">
-                        <span th:errors="*{ratingGenExperience}"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr/>
-    </div>
-
-    <div class="container mt-2">
-        <button type="submit" class="btn btn-secondary mt-3">Save</button>
     </div>
 </form>
 

@@ -67,7 +67,7 @@ public class ReviewController {
     }
 
     @GetMapping("/{reviewId}/edit")
-    public String editReview(@PathVariable Long reviewId, Model model) {
+    public String editReviewForm(@PathVariable Long reviewId, Model model) {
         try {
             Review review = reviewService.findReviewRaw(reviewId);
             model.addAttribute("review", review);
@@ -77,5 +77,15 @@ public class ReviewController {
         } catch (AccessDeniedException e){
             return "dashboard/forbidden";
         }
+    }
+    @PostMapping("/{reviewId}/edit")
+    public String editReview(@PathVariable Long reviewId, @Valid Review review, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            review = reviewService.findReviewRaw(reviewId);
+            model.addAttribute("review", review);
+            return "dashboard/review-edit-form"; //
+        }
+        reviewService.addReview(review);
+        return "dashboard/review-edit-welcome";
     }
 }
