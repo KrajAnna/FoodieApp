@@ -12,44 +12,36 @@
 
 <header th:replace="fragments/headerLog :: header"></header>
 
-<div class="container mt-4">
+
+<div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-md-6 bg-light p-4 rounded shadow-sm">
-            <h4 class="text-dark text-center">Check your reviews</h4>
+        <div class="col-lg-10 col-md-12 bg-light p-4 rounded shadow-sm">
+            <h4 class="text-dark mb-4">Your visits</h4>
+            <div class="table-responsive">
+
+                <table class="table table-striped">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>Where?</th>
+                        <th>When?</th>
+                        <th>How?</th>
+                        <th>More</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="reviewRate : ${reviewRates}">
+                        <td th:text="${reviewRate.review.restaurant.name}"></td>
+                        <td th:text="${reviewRate.review.date}"></td>
+                        <td th:text="${reviewRate.rating}"></td>
+                        <td><a class="btn btn-sm btn-primary" th:href="@{/reviews/{id}(id=${reviewRate.review.id})}">Check details</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <a th:href="@{/reviews/add}" class="btn btn-secondary mt-3">Add a new visit</a>
         </div>
     </div>
 </div>
-
-<div class="container mt-2">
-    <div class="table-container">
-        <table class="table table-striped">
-            <thead class="table-dark">
-            <tr>
-                <th>Restaurant</th>
-                <th>Date</th>
-                <th>Rating Total</th>
-                <th>More</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="reviewRate : ${reviewRates}">
-                <td th:text="${reviewRate.review.restaurant.name}"></td>
-                <td th:text="${reviewRate.review.date}"></td>
-                <td th:text="${reviewRate.rating}"></td>
-                <td><a class="btn btn-sm btn-primary" th:href="@{/reviews/{id}(id=${reviewRate.review.id})}">Check details</a></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<div class="container mt-4">
-    <div class="row justify-content-center">
-        <div class="col-md-6 bg-light p-4 rounded shadow-sm d-flex align-items-center justify-content-center">
-            <a th:href="@{/reviews/add}" class="btn btn-secondary mt-3">Add a new review!</a>
-        </div>
-    </div>
-</div>
-
 </body>
 </html>

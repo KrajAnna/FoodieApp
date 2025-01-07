@@ -12,18 +12,13 @@
 <header th:replace="fragments/headerLog :: header"></header>
 
 
-<div class="container mt-4">
+<div class="container-fluid">
   <div class="row justify-content-center">
-    <div class="col-md-6 bg-light p-4 rounded shadow-sm text-center">
-      <h4 class="text-dark">Congrats! New review was added to the database</h4>
-    </div>
-  </div>
-</div>
-
-<div class="container mt-4">
-  <div class="row justify-content-center">
-    <div class=" text-center">
-      <a th:href="@{/reviews/all}" class="btn btn-secondary mt-3">Go back to the all reviews list</a>
+    <div class="col-lg-10 col-md-12 bg-light p-4 rounded shadow-sm">
+      Congrats! New review was added.
+      <div class=" text-left">
+        <a th:href="@{/reviews/all}" class="btn btn-secondary mt-3">Visits list</a>
+      </div>
     </div>
   </div>
 </div>

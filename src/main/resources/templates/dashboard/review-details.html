@@ -11,13 +11,11 @@
 
 <header th:replace="fragments/headerLog :: header"></header>
 
-<div class="container mt-4">
+<div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-md-6 bg-light p-4 rounded shadow-sm">
-            <h4 class="text-dark text-center">Check the review's details</h4>
-        </div>
-    </div>
-</div>
+            <h5 class="text-dark"><span th:text="${reviewRate.review.restaurant.name}"></span> in <span th:text="${reviewRate.review.date}"></span></h5>
+
 
 <div class="container mt-4">
     <div class="row mb-3">
@@ -66,12 +64,11 @@
     <hr/>
 </div>
 
-<div class="container mt-4">
-    <div class="row justify-content-center">
-        <div class="col-md-6 bg-light p-4 rounded shadow-sm d-flex align-items-center justify-content-center">
-            <a th:href="@{/reviews}" class="btn btn-secondary mt-3 me-3">Go back to the reviews list</a>
-            <a th:if="${reviewRate.editable}" th:href="@{'/reviews/' + ${reviewRate.review.id} + '/edit'}" class="btn btn-primary mt-3 ml-2">Edit Review</a>
+            <div class="justify-content-left">
+            <a th:href="@{/reviews}" class="btn btn-secondary mt-3 me-3">Visits list</a>
+            <a th:if="${reviewRate.editable}" th:href="@{'/reviews/' + ${reviewRate.review.id} + '/edit'}" class="btn btn-primary mt-3 ml-2">Edit</a>
         </div>
+    </div>
     </div>
 </div>
 

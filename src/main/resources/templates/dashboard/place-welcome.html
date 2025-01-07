@@ -11,21 +11,18 @@
 
 <header th:replace="fragments/headerLog :: header"></header>
 
-<div class="container mt-4">
+<div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-md-6 bg-light p-4 rounded shadow-sm text-center">
-            <h4 class="text-dark">Thanks! You added the new restaurant</h4>
+        <div class="col-lg-10 col-md-12 bg-light p-4 rounded shadow-sm">
+          Thanks! You added the new restaurant
+            <div class=" text-left">
+                <a th:href="@{/places}" class="btn btn-secondary mt-3">Places list</a>
+                <a th:href="@{/reviews/add}" class="btn btn-success mt-3">Add visit</a>
+            </div>
         </div>
     </div>
 </div>
 
-<div class="container mt-4">
-    <div class="row justify-content-center">
-        <div class=" text-center">
-            <a th:href="@{/places}" class="btn btn-secondary mt-3">Go back to the restaurants list</a>
-        </div>
-    </div>
-</div>
 
 </body>
 </html>
