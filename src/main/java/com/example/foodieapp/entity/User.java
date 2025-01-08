@@ -28,7 +28,6 @@ public class User {
     @NotNull
     @Size(min = 2)
     private String lastName;
-    //walidacja hasla?
     @NotBlank
     @Size(min = 5)
     private String password;

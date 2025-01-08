@@ -1,5 +1,6 @@
 package com.example.foodieapp.controller;
 
+import com.example.foodieapp.exception.UserAlreadyExistsException;
 import com.example.foodieapp.repository.UserRepository;
 import com.example.foodieapp.services.UserService;
 import jakarta.validation.Valid;
@@ -29,14 +30,16 @@ public class HomeController {
 
     @PostMapping("")
     public String loginForm(@Valid User user, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            return "home/signup-form";
+        try{
+            if (bindingResult.hasErrors()) {
+                return "home/signup-form";
+            }
+            userService.saveUser(user);
+            model.addAttribute("user", user);
+            return "home/signup-welcome";
+        } catch (UserAlreadyExistsException e){
+            model.addAttribute("massage", e.getMessage());
+            return "home/user-add-error";
         }
-        userService.saveUser(user);
-        model.addAttribute("user", user);
-        return "home/signup-welcome"; //
-
     }
-
-
 }

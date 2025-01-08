@@ -2,6 +2,7 @@ package com.example.foodieapp.services;
 
 import com.example.foodieapp.entity.Restaurant;
 import com.example.foodieapp.entity.User;
+import com.example.foodieapp.exception.UserAlreadyExistsException;
 import com.example.foodieapp.repository.UserRepository;
 import com.example.foodieapp.security.Role;
 import com.example.foodieapp.security.RoleEntity;
@@ -31,6 +32,9 @@ public class UserService {
 
 
     public void saveUser(User user) {
+        if (checkEmail(user.getEmail())){
+            throw new UserAlreadyExistsException( "User " + user.getEmail() + " already exists.");
+        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         RoleEntity userRole = roleRepository.findByName(Role.USER);
         user.setRoles(Set.of(userRole));
@@ -40,6 +44,10 @@ public class UserService {
     public void editUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
+    }
+
+    private boolean checkEmail(String email){
+        return userRepository.existsByEmail(email);
     }
 
     public String getCurrentUserEmail(UserDetails userDetails) {
