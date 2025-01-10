@@ -17,11 +17,6 @@ public class RestrictedController {
     @Secured("ROLE_USER")
     @GetMapping("/user")
     public String getUserRestricted(@AuthenticationPrincipal UserDetails userDetails) {
-        // do servisu UserServc
-//        String review = "review1";
-//        User user = userRepository.getByUsername(userDetails.getUsername());
-//        user.getReviews().add(review);
-//        userRepository.save(user);
         return "restricted";
     }
 

@@ -30,7 +30,7 @@ public class FoodieAppApplication extends SpringBootServletInitializer {
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")
                         .failureUrl("/login/fail")
-                        .defaultSuccessUrl("/reviews")
+                        .defaultSuccessUrl("/about")
                         .permitAll()
                 )
                 .logout(logout -> logout
