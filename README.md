@@ -2,7 +2,7 @@
 
 FoodieApp is a web application designed to help users track and manage their restaurant visits. With FoodieApp, users can record each visit, rate restaurants, and calculate various statistics related to their dining experiences. 
 
-The application is deployed on an AWS EC2 instance. **[FoodieApp](http://your-ec2-instance-address.amazonaws.com)**  
+The application is deployed on an AWS EC2 instance. **[FoodieApp](http://ec2-18-199-166-181.eu-central-1.compute.amazonaws.com:8080/)**  
 
 ___
 
