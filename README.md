@@ -2,6 +2,10 @@
 
 FoodieApp is a web application designed to help users track and manage their restaurant visits. With FoodieApp, users can record each visit, rate restaurants, and calculate various statistics related to their dining experiences. 
 
+The application is deployed on an AWS EC2 instance. **[FoodieApp](http://your-ec2-instance-address.amazonaws.com)**  
+
+___
+
 ## Features
 
 - **User Management**: Support for user login and registration.
@@ -10,14 +14,13 @@ FoodieApp is a web application designed to help users track and manage their res
 - **Adding Places**: Adding restaurants to the database.
 - **Statistics Calculation**: Currently includes basic statistics to analyze your dining history and preferences.
 
-## Technology
+## Technologies
 
-- **Spring Boot**: For building a production-ready application.
-- **Hibernate**: ORM framework for mapping Java objects to database tables.
-- **Spring Security**: To secure the application and protect user data.
-- **Spring Data JPA**: To simplify data access and manipulation.
-- **Thymeleaf**: Replaced JSP views with Thymeleaf templates for a more flexible and modern UI.
-
+- **Backend**: Spring Boot, Hibernate, Spring Security, Spring Data JPA
+- **Frontend**: Thymeleaf  
+- **Database**: MySQL  
+- **Infrastructure**: AWS EC2, Docker  
+  
 ## Planned Enhancements
 
 This project is developed with the following enhancements planned for future versions:
